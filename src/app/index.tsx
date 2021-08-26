@@ -9,6 +9,8 @@ import SplashScreen from 'react-native-splash-screen';
 import StatusBariOS from '../presentation/components/StatusBariOS';
 import { ColorPrimary, Container } from '../utils/global';
 
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 // import { Container } from './styles';
 
 const app: React.FC = () => {
@@ -26,7 +28,8 @@ const app: React.FC = () => {
           <StatusBariOS />
         )
       }
-      <Container />
+      <Ionicons name="home"  size={35} />
+      {/* <Container /> */}
     </NavigationContainer>
   )
 }
