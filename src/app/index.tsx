@@ -11,6 +11,8 @@ import { ColorPrimary, Container } from '../utils/global';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import Routes from '../infra/routes';
+
 // import { Container } from './styles';
 
 const app: React.FC = () => {
@@ -28,7 +30,7 @@ const app: React.FC = () => {
           <StatusBariOS />
         )
       }
-      <Ionicons name="home"  size={35} />
+      <Routes />
       {/* <Container /> */}
     </NavigationContainer>
   )
