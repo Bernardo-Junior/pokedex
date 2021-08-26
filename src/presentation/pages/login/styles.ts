@@ -23,9 +23,9 @@ export const ContainerInputs = styled.View`
 
 export const ImageLabels = styled.Image`
   width: ${resp(50)}px;
-  height: ${resp(30)}px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  height: ${resp(16)}px;
   margin-left: ${resp(5)}px;
+  margin-bottom: ${resp(5)}px;
 `;
 
 export const BtnEye = styled.TouchableOpacity``;
@@ -33,7 +33,6 @@ export const BtnEye = styled.TouchableOpacity``;
 export const BtnConfirm = styled.TouchableOpacity`
   width: ${resp(250)}px;
   height: ${resp(60)}px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: ${resp(7)}px;
   background: #3E60A4;
   border: 1px solid #3E60A4;

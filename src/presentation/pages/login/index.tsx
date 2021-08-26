@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, ContainerInput, Input } from '../../../utils/global';
+import { Container, ContainerInput, Input, styles } from '../../../utils/global';
 
 //Importação das imagens
 import textSingin from '../../../assets/images/textSingin.png';
@@ -33,16 +33,20 @@ const login: React.FC = () => {
         <ImageSignin source={textSingin} resizeMode="contain" />
       </ContainerImage>
       <ContainerInputs>
-        <ImageLabels source={textEmail} resizeMode="contain" />
-        <ContainerInput >
+        <ImageLabels source={textEmail} resizeMode="stretch" />
+        <ContainerInput style={styles.shadow}>
           <Input
             placeholder="Digite seu email"
             placeholderTextColor={"#3E60A4"}
           />
         </ContainerInput>
 
-        <ImageLabels style={{ marginTop: resp(20) }} source={textPassword} resizeMode="contain" />
-        <ContainerInput>
+        <ImageLabels
+          style={{ marginTop: resp(20) }}
+          source={textPassword}
+          resizeMode="stretch"
+        />
+        <ContainerInput style={styles.shadow}>
           <Input
             placeholder="Digite a sua senha"
             placeholderTextColor={"#3E60A4"}
@@ -63,7 +67,7 @@ const login: React.FC = () => {
         </ContainerInput>
       </ContainerInputs>
 
-      <BtnConfirm>
+      <BtnConfirm style={styles.shadow}>
         <LabelBtnConfirm>
           ENTRAR
         </LabelBtnConfirm>
