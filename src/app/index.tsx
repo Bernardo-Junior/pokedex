@@ -7,7 +7,7 @@ import 'react-native-gesture-handler';
 
 import SplashScreen from 'react-native-splash-screen';
 import StatusBariOS from '../presentation/components/StatusBariOS';
-import { ColorPrimary } from '../utils/global';
+import { ColorPrimary, Container } from '../utils/global';
 
 // import { Container } from './styles';
 
@@ -26,7 +26,7 @@ const app: React.FC = () => {
           <StatusBariOS />
         )
       }
-      <View />
+      <Container />
     </NavigationContainer>
   )
 }
