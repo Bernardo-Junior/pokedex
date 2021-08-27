@@ -11,21 +11,13 @@ import StatusBariOS from '../presentation/components/StatusBariOS';
 import { ColorPrimary } from '../utils/global';
 
 import Routes from '../infra/routes';
-
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { UserProvider } from '../data/contexts/User';
 
 const App: React.FC = () => {
   
   useEffect(() => {
     SplashScreen.hide();
-    teste()
   })
-
-  const teste = async () => {
-    const asyncRetorno = await AsyncStorage.getItem('@teste');
-
-    console.log(asyncRetorno);
-  }
 
   return (
     <NavigationContainer>
@@ -36,7 +28,9 @@ const App: React.FC = () => {
           <StatusBariOS />
         )
       }
-      <Routes />
+      <UserProvider>
+        <Routes />
+      </UserProvider>
     </NavigationContainer>
   )
 }

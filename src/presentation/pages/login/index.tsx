@@ -25,12 +25,27 @@ import {
 } from './styles';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
+import { IUser } from '../../../data/protocols/User';
+import { useContext } from 'react';
+import UserContext from '../../../data/contexts/User';
 
 
 const login: React.FC = () => {
   const [press, setPress] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("bernardo@gmail.com");
+  const [password, setPassword] = useState<string>("12345");
+  const [buttonPress, setButtonPress] = useState<boolean>(false);
   const { navigate } = useNavigation();
+  const { signin } = useContext(UserContext);
+
+  const renderLoading = () => {
+    return (
+      <ActivityIndicator color={"#FFFFFF"} size="small" />
+    )
+  }
 
   return (
     <Container>
@@ -53,6 +68,9 @@ const login: React.FC = () => {
               <Input
                 placeholder="Digite seu email"
                 placeholderTextColor={"#3E60A4"}
+                value={email}
+                onChangeText={value => setEmail(value)}
+                keyboardType="email-address"
               />
             </ContainerInput>
 
@@ -67,6 +85,8 @@ const login: React.FC = () => {
                 placeholderTextColor={"#3E60A4"}
                 style={{ width: '85%' }}
                 secureTextEntry={press}
+                value={password}
+                onChangeText={value => setPassword(value)}
               />
               {
                 press ? (
@@ -89,10 +109,24 @@ const login: React.FC = () => {
             </Btn>
           </ContainerInputs>
 
-          <BtnConfirm style={styles.shadow}>
-            <LabelBtnConfirm>
-              ENTRAR
-            </LabelBtnConfirm>
+          <BtnConfirm 
+            disabled={buttonPress} 
+            style={styles.shadow}
+            onPress={async () => { 
+              setButtonPress(!buttonPress);
+              let result = await signin(email, password);
+              setButtonPress(result);
+            }}
+          >
+            {
+              buttonPress ? (
+                renderLoading()
+              ) : (
+                <LabelBtnConfirm>
+                  ENTRAR
+                </LabelBtnConfirm>
+              )
+            }
           </BtnConfirm>
         </ScrollView>
       </KeyboardAvoidingView>
