@@ -15,12 +15,13 @@ import resp from '../../../utils/responsivity';
 
 import {
   BtnConfirm,
-  BtnEye,
+  Btn,
   ContainerImage,
   ContainerInputs,
   ImageLabels,
   ImageSignin,
-  LabelBtnConfirm
+  LabelBtnConfirm,
+  LabelRegister
 } from './styles';
 import { useState } from 'react';
 
@@ -55,16 +56,21 @@ const login: React.FC = () => {
           />
           {
             press ? (
-              <BtnEye onPress={() => { setPress(!press) }}>
+              <Btn onPress={() => { setPress(!press) }}>
                 <EyeClosed width={resp(30)} height={resp(30)} />
-              </BtnEye>
+              </Btn>
             ) : (
-              <BtnEye onPress={() => { setPress(!press) }}>
+              <Btn onPress={() => { setPress(!press) }}>
                 <EyeOpen width={resp(30)} height={resp(30)} />
-              </BtnEye>
+              </Btn>
             )
           }
         </ContainerInput>
+        <Btn>
+          <LabelRegister>
+            Não possui uma conta? clique aqui para se cadastrar
+          </LabelRegister>
+        </Btn>
       </ContainerInputs>
 
       <BtnConfirm style={styles.shadow}>

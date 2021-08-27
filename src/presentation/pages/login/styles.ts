@@ -28,7 +28,7 @@ export const ImageLabels = styled.Image`
   margin-bottom: ${resp(5)}px;
 `;
 
-export const BtnEye = styled.TouchableOpacity``;
+export const Btn = styled.TouchableOpacity``;
 
 export const BtnConfirm = styled.TouchableOpacity`
   width: ${resp(250)}px;
@@ -39,7 +39,7 @@ export const BtnConfirm = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   align-self: center;
-  margin-top: ${resp(80)}px;
+  margin-top: ${resp(60)}px;
 `;
 
 export const LabelBtnConfirm = styled.Text`
@@ -48,4 +48,11 @@ export const LabelBtnConfirm = styled.Text`
   letter-spacing: 0.0703846px;
   color: #FFFFFF;
   font-family: 'OpenSans-ExtraBold';
+`;
+
+export const LabelRegister = styled.Text`
+  font-family: "OpenSans-SemiBold";
+  margin-top: ${resp(20)}px;
+  align-self: center;
+  color: #FFFFFF;
 `;
