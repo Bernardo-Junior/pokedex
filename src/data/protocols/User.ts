@@ -1,10 +1,10 @@
 export interface IUser {
-  logged: Boolean;
-  name: String;
-  password: String;
-  favorites: Array<IDescriptionPokemon>;
-  captured: Array<IDescriptionPokemon>;
-  sighted: Array<IDescriptionPokemon>;
+  logged: Boolean | null;
+  name: String | null;
+  password: String | null;
+  favorites: Array<IDescriptionPokemon> | null;
+  captured: Array<IDescriptionPokemon> | null;
+  sighted: Array<IDescriptionPokemon> | null;
 }
 
 export interface IDescriptionPokemon {

@@ -12,28 +12,20 @@ import { ColorPrimary } from '../utils/global';
 
 import Routes from '../infra/routes';
 
-// import { useFonts } from 'expo-font';
-
-// import { Container } from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const App: React.FC = () => {
   
   useEffect(() => {
-    SplashScreen.hide()
+    SplashScreen.hide();
+    teste()
   })
 
-  // const [effectLoaded, setEffectLoaded] = useState(false);
+  const teste = async () => {
+    const asyncRetorno = await AsyncStorage.getItem('@teste');
 
-  // const [loaded] = useFonts({
-  //   OPenSansRegular: require('../assets/fonts/Open_Sans/OpenSans-Regular.ttf'),
-  //   OPenSansMedium: require('../assets/fonts/Open_Sans/OpenSans-Bold.ttf'),
-  //   OPenSansBold: require('../assets/fonts/Open_Sans/OpenSans-Bold.ttf'),
-  //   OPenSansSemiBold: require('../assets/fonts/Open_Sans/OpenSans-SemiBold.ttf'),
-  // });
-
-  // if (!loaded) {
-  //   return null;
-  // }
+    console.log(asyncRetorno);
+  }
 
   return (
     <NavigationContainer>
