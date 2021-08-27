@@ -6,7 +6,6 @@ export const ContainerImage = styled.View`
   width: 100%;
   height: auto;
   align-items: center;
-  margin-top: 30%;
 `;
 
 export const ImageSignin = styled.Image`
@@ -40,6 +39,7 @@ export const BtnConfirm = styled.TouchableOpacity`
   align-items: center;
   align-self: center;
   margin-top: ${resp(60)}px;
+  margin-bottom: ${resp(100)}px;
 `;
 
 export const LabelBtnConfirm = styled.Text`
