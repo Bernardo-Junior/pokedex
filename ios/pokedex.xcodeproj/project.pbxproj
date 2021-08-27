@@ -11,10 +11,20 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		150D21F669804EBC889A499F /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FA60A88B0394A7B94C49E40 /* OpenSans-Bold.ttf */; };
+		2513F76878C84A00919A572F /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD675ED4A56C4465BC833762 /* OpenSans-ExtraBoldItalic.ttf */; };
+		5D7154568CE24118AE0F6EE9 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A323C63993D4918A09D4FF0 /* OpenSans-Italic.ttf */; };
 		6172F2D35A4C3AA820D92908 /* libPods-pokedex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-pokedex.a */; };
 		7EF68E3733C33B6898317E18 /* libPods-pokedex-pokedexTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-pokedex-pokedexTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		876415D554D442CDAD88DC5E /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB3D7E8904BD4B358AD2A0C4 /* OpenSans-Regular.ttf */; };
+		8FAD031A4B4C46B7A74B4277 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 447DDC6BC605438F84249CB8 /* OpenSans-SemiBold.ttf */; };
+		96E42D1372774078AC5AB3CC /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F14B6EE9EEB415DAE0F367D /* OpenSans-BoldItalic.ttf */; };
+		B414357A7A234B23B24395DB /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D4B7B333AD240D2A27972FE /* OpenSans-ExtraBold.ttf */; };
+		C0E2B558BB4F4014A7CF69EA /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD01D5A5E104413CA8124EEC /* OpenSans-SemiBoldItalic.ttf */; };
 		D1104BA126D74AF900456DB1 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1104BA026D74AF900456DB1 /* Launch Screen.storyboard */; };
+		F37B6AFE47B34AFABD1EC4B1 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5AEEB20FB3F4766934FF63A /* OpenSans-Light.ttf */; };
+		FE09579A0E4642AC8E4C106F /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7330BC55FCDB4F8D90F41532 /* OpenSans-LightItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +43,7 @@
 		00E356F21AD99517003FC87E /* pokedexTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pokedexTests.m; sourceTree = "<group>"; };
 		06F0A31D752642E58445DF63 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		0866AE89A9E440A8848E5002 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		0D4B7B333AD240D2A27972FE /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBold.ttf"; path = "../src/assets/fonts/Open_Sans/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* pokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = pokedex/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = pokedex/AppDelegate.m; sourceTree = "<group>"; };
@@ -40,11 +51,16 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = pokedex/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = pokedex/main.m; sourceTree = "<group>"; };
 		1D0AE47A65C8663E3B452821 /* Pods-pokedex-pokedexTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pokedex-pokedexTests.release.xcconfig"; path = "Target Support Files/Pods-pokedex-pokedexTests/Pods-pokedex-pokedexTests.release.xcconfig"; sourceTree = "<group>"; };
+		3F14B6EE9EEB415DAE0F367D /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-BoldItalic.ttf"; path = "../src/assets/fonts/Open_Sans/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		447DDC6BC605438F84249CB8 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBold.ttf"; path = "../src/assets/fonts/Open_Sans/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		559EA7331C1C45D19804C550 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		5DEDB580419143DA8AC11187 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		5FA60A88B0394A7B94C49E40 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/Open_Sans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-pokedex.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pokedex.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A323C63993D4918A09D4FF0 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Italic.ttf"; path = "../src/assets/fonts/Open_Sans/OpenSans-Italic.ttf"; sourceTree = "<group>"; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-pokedex-pokedexTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pokedex-pokedexTests.debug.xcconfig"; path = "Target Support Files/Pods-pokedex-pokedexTests/Pods-pokedex-pokedexTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E0CFE6DBCF84EA7BF26532C /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		7330BC55FCDB4F8D90F41532 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../src/assets/fonts/Open_Sans/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
 		7426C165772849D88C9BEA6F /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		776BC446A9F346829EF566D9 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = pokedex/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,12 +69,16 @@
 		8F29DCAA176F4A80AA49FF70 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		ABFE59519B596E51CEFDCCC0 /* libPods-pokedex-pokedexTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pokedex-pokedexTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA845DD697FA423EB48A9DEB /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		BD01D5A5E104413CA8124EEC /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBoldItalic.ttf"; path = "../src/assets/fonts/Open_Sans/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		C0A881CF5CF3F2B244570E2A /* Pods-pokedex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pokedex.debug.xcconfig"; path = "Target Support Files/Pods-pokedex/Pods-pokedex.debug.xcconfig"; sourceTree = "<group>"; };
+		C5AEEB20FB3F4766934FF63A /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/assets/fonts/Open_Sans/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		CD675ED4A56C4465BC833762 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/Open_Sans/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		D00AAFFCFCFDA5787532823F /* Pods-pokedex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pokedex.release.xcconfig"; path = "Target Support Files/Pods-pokedex/Pods-pokedex.release.xcconfig"; sourceTree = "<group>"; };
 		D1104BA026D74AF900456DB1 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D93041F5A8AA4D3DABF36421 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		DA66C60B28FB4319955D6361 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		E0952A88F9084653817AEBCC /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		EB3D7E8904BD4B358AD2A0C4 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/Open_Sans/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EF8903959EF14F24864BE0E2 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		FFC7020BBEBE4D01B7E703E7 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
@@ -176,6 +196,16 @@
 				6E0CFE6DBCF84EA7BF26532C /* Octicons.ttf */,
 				E0952A88F9084653817AEBCC /* SimpleLineIcons.ttf */,
 				776BC446A9F346829EF566D9 /* Zocial.ttf */,
+				5FA60A88B0394A7B94C49E40 /* OpenSans-Bold.ttf */,
+				3F14B6EE9EEB415DAE0F367D /* OpenSans-BoldItalic.ttf */,
+				0D4B7B333AD240D2A27972FE /* OpenSans-ExtraBold.ttf */,
+				CD675ED4A56C4465BC833762 /* OpenSans-ExtraBoldItalic.ttf */,
+				6A323C63993D4918A09D4FF0 /* OpenSans-Italic.ttf */,
+				C5AEEB20FB3F4766934FF63A /* OpenSans-Light.ttf */,
+				7330BC55FCDB4F8D90F41532 /* OpenSans-LightItalic.ttf */,
+				EB3D7E8904BD4B358AD2A0C4 /* OpenSans-Regular.ttf */,
+				447DDC6BC605438F84249CB8 /* OpenSans-SemiBold.ttf */,
+				BD01D5A5E104413CA8124EEC /* OpenSans-SemiBoldItalic.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -288,6 +318,16 @@
 				D1104BA126D74AF900456DB1 /* Launch Screen.storyboard in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				150D21F669804EBC889A499F /* OpenSans-Bold.ttf in Resources */,
+				96E42D1372774078AC5AB3CC /* OpenSans-BoldItalic.ttf in Resources */,
+				B414357A7A234B23B24395DB /* OpenSans-ExtraBold.ttf in Resources */,
+				2513F76878C84A00919A572F /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				5D7154568CE24118AE0F6EE9 /* OpenSans-Italic.ttf in Resources */,
+				F37B6AFE47B34AFABD1EC4B1 /* OpenSans-Light.ttf in Resources */,
+				FE09579A0E4642AC8E4C106F /* OpenSans-LightItalic.ttf in Resources */,
+				876415D554D442CDAD88DC5E /* OpenSans-Regular.ttf in Resources */,
+				8FAD031A4B4C46B7A74B4277 /* OpenSans-SemiBold.ttf in Resources */,
+				C0E2B558BB4F4014A7CF69EA /* OpenSans-SemiBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

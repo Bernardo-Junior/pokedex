@@ -39,4 +39,5 @@ export const ContainerInput = styled.View`
 export const Input = styled(TextInput)`
   width: 95%;
   height: ${resp(55)}px;
+  font-family: 'OpenSans-Light';
 `;

@@ -43,9 +43,9 @@ export const BtnConfirm = styled.TouchableOpacity`
 `;
 
 export const LabelBtnConfirm = styled.Text`
-  font-weight: 800;
   font-size: 15px;
   line-height: 20px;
   letter-spacing: 0.0703846px;
   color: #FFFFFF;
+  font-family: 'OpenSans-ExtraBold';
 `;
