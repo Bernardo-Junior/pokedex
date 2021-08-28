@@ -47,8 +47,8 @@ export const ImageList = styled.Image`
 
 export const LabelList = styled.Text`
   height: auto;
-  width: ${resp(80)}px;
+  width: ${resp(100)}px;
   text-align: center;
-  color: #000000;
-  font-family: "OpenSans-ExtraBold";
+  color: #3E60A4;
+  font-family: "OpenSans-Bold";
 `;

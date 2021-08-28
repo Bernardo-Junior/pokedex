@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
 
 //Icones
 import Pokeball from '../../../assets/icons/pokeball.png';
@@ -32,7 +32,7 @@ import {
 import resp from '../../../utils/responsivity';
 
 const SideBar: React.FC<object> = ({ }) => {
-  const { navigate, goBack, getState } = useNavigation();
+  const { navigate, goBack, dispatch } = useNavigation();
 
   return (
     <>
@@ -51,7 +51,7 @@ const SideBar: React.FC<object> = ({ }) => {
           </ViewInfoUser>
 
 
-          <ViewOptions style={{ marginTop: resp(50) }}>
+          <ViewOptions onPress={() => { navigate("Home"), dispatch(DrawerActions.closeDrawer()) }} style={{ marginTop: resp(50) }}>
             <BtnOption>
               <FontAwesome5 name="book-open" size={25} color="#FFFFFF" />
               <TxtOption>TODOS OS POKEMONS</TxtOption>

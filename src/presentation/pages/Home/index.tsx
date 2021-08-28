@@ -1,6 +1,6 @@
 import React from 'react';
-import { FlatList, ListRenderItem, View } from 'react-native';
-import { Container, styles } from '../../../utils/global';
+import { ActivityIndicator, FlatList, ListRenderItem, RefreshControl, View } from 'react-native';
+import { ColorPrimary, Container, errorFunction, styles } from '../../../utils/global';
 import Header from '../../components/Header';
 
 //Estilização 
@@ -14,43 +14,58 @@ Feather.loadFont();
 
 //Imagens
 import pokeball from '../../../assets/icons/pokeball.png';
+import { usePokemons } from '../../../data/hooks/usePokemons';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { IListPokemons, IResult } from '../../../data/protocols/models/IUsePokemons';
+import { useCallback } from 'react';
 
 // import { Container } from './styles';
 
 const Home: React.FC = () => {
-  const pokemons = [
-    {
-      name: "1",
-      url: "String",
-      title: ""
-    },
-    {
-      name: "2",
-      url: "String",
-      title: ""
-    },
-    {
-      name: "3",
-      url: "String",
-      title: ""
-    },
-  ]
-  const renderItems: ListRenderItem<any> = ({ item }) => {
-    return (
-      item.titulo !== "empty" ? (
-        <ContainerList style={styles.shadow}>
-          <ImageList source={pokeball} />
-          <LabelList>
-            PIKACHU
-          </LabelList>
-        </ContainerList>
-      ) : (
-        <ContainerList
-          style={{ backgroundColor: 'transparent' }}
-          disabled={true}
-        />
-      )
+  const { fetchPokemons, fetchDescriptionPokemons } = usePokemons();
+  const [pokemons, setPokemons] = useState<IResult[]>([]);
+  const [nextUrl, setNextUrl] = useState<string>("/pokemon?offset=0&;amp;limit=20");
+  const [loading, setLoading] = useState<Boolean>(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
 
+  useEffect(() => {
+    fetchPokemonsList();
+  }, [])
+
+  const fetchPokemonsList = async () => {
+    setLoading(true);
+    const [result, resultError] = await fetchPokemons(nextUrl);
+
+    if (!resultError) {
+      if (!refreshing) {
+        setPokemons([...pokemons, ...result.results]);
+      } else {
+        setPokemons(result.results);
+      }
+      setNextUrl(result.next);
+    } else {
+      errorFunction(
+        "Erro de Conexão",
+        "Ocorreu um erro ao carregar os pokemons",
+        () => {
+          fetchPokemonsList()
+        },
+      )
+    }
+    setRefreshing(false);
+    setLoading(false);
+  }
+
+
+  const renderItems: ListRenderItem<IResult> = ({ item }) => {
+    return (
+      <ContainerList style={styles.shadow}>
+        <ImageList source={pokeball} />
+        <LabelList>
+          {item.name}
+        </LabelList>
+      </ContainerList>
     )
   }
 
@@ -68,18 +83,43 @@ const Home: React.FC = () => {
     )
   }
 
+  const renderLoading = () => {
+    return (
+      <ActivityIndicator color="#000000" size="small" />
+    )
+  }
+
+  function _onRefresh() {
+    setRefreshing(true);
+    setNextUrl("/pokemon?offset=0&;amp;limit=20")
+    fetchPokemonsList();
+  }
+
   return (
     <Container style={{ backgroundColor: "#FFFFFF" }}>
       <Header name="Todos os Pokemons" />
 
       <FlatList
-        ListHeaderComponent={renderHeader}
-        data={formatData(pokemons, 3)}
+        // ListHeaderComponent={renderHeader}
+        refreshControl={
+          <RefreshControl
+            collapsable={true}
+            refreshing={refreshing}
+            onRefresh={_onRefresh.bind(this)}
+            tintColor={ColorPrimary}
+          />
+        }
+        refreshing={refreshing}
+        data={pokemons}
         numColumns={3}
         keyExtractor={pokemon => pokemon.name}
         renderItem={renderItems}
+        onEndReachedThreshold={nextUrl === null ? null : 1}
+        onEndReached={(info: { distanceFromEnd: number }) => { nextUrl === null ? null : fetchPokemonsList() }}
         contentContainerStyle={{ alignItems: 'center', marginTop: resp(10) }}
+        ListFooterComponent={loading && renderLoading}
       />
+
     </Container>
   )
 }

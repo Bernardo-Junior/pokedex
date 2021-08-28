@@ -2,8 +2,26 @@ import styled from "styled-components/native";
 
 import resp from '../utils/responsivity';
 
-import { TextInput } from "react-native";
+import { Alert, TextInput } from "react-native";
 import { StyleSheet } from "react-native";
+
+export const errorFunction = (title: string, message: string, callback: any) => {
+  Alert.alert(
+      `${title}`,
+      `${message}`,
+      [
+          {
+              text: 'Cancelar',
+              style: 'cancel'
+          },
+          {
+              text: 'Tentar novamente',
+              onPress: () => callback()
+          },
+      ],
+      { cancelable: true },
+  );
+}
 
 export const ColorPrimary = "#ED5564";
 

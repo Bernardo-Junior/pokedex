@@ -1,11 +1,12 @@
 export interface IUsePokemons {
-  fetchPokemons(offset: number) : Promise<[IListPokemons, Boolean]>
-  fetchDescriptionPokemons(offset: number): Promise<[IDescriptionPokemon, Boolean]>
+  fetchPokemons(url: string) : Promise<[IListPokemons, Boolean]>
+  fetchDescriptionPokemons(url: string): Promise<[IDescriptionPokemon, Boolean]>
 }
 
 export interface IResult {
   name: string;
   url: string;
+  titulo: string;
 }
 
 export interface IListPokemons {

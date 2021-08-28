@@ -3,11 +3,11 @@ import { IListPokemons, IUsePokemons, IDescriptionPokemon } from "../protocols/m
 
 export const usePokemons = (): IUsePokemons => {
 
-  const fetchPokemons = async (offset: number): Promise<[IListPokemons, Boolean]> => {
+  const fetchPokemons = async (url: string): Promise<[IListPokemons, Boolean]> => {
     let resultFetch: IListPokemons = {} as IListPokemons;
     let resultError: Boolean = false;
 
-    await api.get(`/pokemon?offset=${offset}&limit=20`)
+    await api.get(`${url}`)
       .then(response => {
         resultFetch = response.data
         resultError = false;
@@ -20,12 +20,11 @@ export const usePokemons = (): IUsePokemons => {
     return [resultFetch, resultError]
   }
 
-  const fetchDescriptionPokemons = async (offset: number): Promise<[IDescriptionPokemon, Boolean]> => {
+  const fetchDescriptionPokemons = async (url: string): Promise<[IDescriptionPokemon, Boolean]> => {
     let resultDescription: IDescriptionPokemon = {} as IDescriptionPokemon;
     let resultError: Boolean = false;
-    await api.get(`/pokemon?offset=${offset}&limit=20`)
+    await api.get(`${url}`)
       .then(response => {
-        resultDescription = response.data
         resultError = false;
       })
       .catch(error => {
