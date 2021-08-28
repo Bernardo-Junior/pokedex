@@ -1,11 +1,10 @@
 export interface IUser {
-  logged: Boolean;
   name: String;
   email: String;
   password: String;
-  favorites: Array<IDescriptionPokemon> | null;
-  captured: Array<IDescriptionPokemon> | null;
-  sighted: Array<IDescriptionPokemon> | null;
+  favorites: Array<IDescriptionPokemon> | [];
+  captured: Array<IDescriptionPokemon> | [];
+  sighted: Array<IDescriptionPokemon> | [];
 }
 
 export interface IDescriptionPokemon {
@@ -19,4 +18,5 @@ export interface IDescriptionPokemon {
 export interface IUserContext {
   user: IUser | null;
   signin(email: string, password: string): Promise<boolean>;
+  validateFields(name: string, email: string, password: string): void;
 }

@@ -27,11 +27,21 @@ import {
 } from './styles';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import UserContext from '../../../data/contexts/User';
 
 const Register: React.FC = () => {
   const [press, setPress] = useState<boolean>(false);
+  const [name, setName] = useState<string>("Bernardo");
+  const [email, setEmail] = useState<string>("bernardo@gmail.com");
+  const [password, setPassword] = useState<string>("123456");
   const { goBack } = useNavigation();
+
+  const { validateFields } = useContext(UserContext);
+
+  
 
   return (
     <Container>
@@ -60,6 +70,8 @@ const Register: React.FC = () => {
             placeholder="Digite seu nome"
             placeholderTextColor={"#3E60A4"}
             keyboardType="default"
+            value={name}
+            onChangeText={value => setName(value)}
           />
         </ContainerInput>
 
@@ -69,6 +81,10 @@ const Register: React.FC = () => {
             placeholder="Digite seu email"
             placeholderTextColor={"#3E60A4"}
             keyboardType="email-address"
+            value={email}
+            onChangeText={value => setEmail(value)}
+            autoCapitalize={"none"}
+            autoCorrect={false}
           />
         </ContainerInput>
 
@@ -82,6 +98,8 @@ const Register: React.FC = () => {
             placeholderTextColor={"#3E60A4"}
             style={{ width: '85%' }}
             secureTextEntry={press}
+            value={password}
+            onChangeText={value => setPassword(value)}
           />
           {
             press ? (
@@ -97,9 +115,14 @@ const Register: React.FC = () => {
         </ContainerInput>
       </ContainerInputs>
 
-      <BtnConfirm style={styles.shadow}>
+      <BtnConfirm 
+        style={styles.shadow}
+        onPress={() => { 
+          validateFields(name, email, password) 
+        }}
+      >
         <LabelBtnConfirm>
-          ENTRAR
+          CRIAR
         </LabelBtnConfirm>
       </BtnConfirm>
       </ScrollView>
