@@ -14,7 +14,9 @@ export const ContainerHeader = styled.SafeAreaView`
 
 export const Image = styled.Image`
   width: ${resp(220)}px;
-  height: ${resp(30)}px;
+  height: ${resp(25)}px;
 `;
 
-export const Btn = styled.TouchableOpacity``;
+export const Btn = styled.TouchableOpacity`
+  right: ${resp(40)}px;
+`;

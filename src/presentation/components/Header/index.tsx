@@ -29,11 +29,10 @@ const Header: React.FC<IHeader> = ({ name }) => {
           style={[
             styles.shadow,
             {
-              marginBottom: resp(10),
-              right: resp(40)
+              marginBottom: resp(8),
             }
           ]}
-          name="list"
+          name="menu"
           size={resp(35)}
           color="#FFFFFF"
         />
