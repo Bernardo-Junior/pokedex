@@ -7,6 +7,8 @@ import Pokeball from '../../../assets/icons/pokeball.png';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 Ionicons.loadFont();
 
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
 
 //Estilização
 import {
@@ -51,8 +53,30 @@ const SideBar: React.FC<object> = ({ }) => {
 
           <ViewOptions style={{ marginTop: resp(50) }}>
             <BtnOption>
+              <FontAwesome5 name="book-open" size={25} color="#FFFFFF" />
+              <TxtOption>TODOS OS POKEMONS</TxtOption>
+              <ViewIconPress>
+                <IconsFeatherPlus name="chevron-right" size={30} />
+              </ViewIconPress>
+            </BtnOption>
+            <Hr />
+          </ViewOptions>
+
+          <ViewOptions>
+            <BtnOption>
               <IconsMaterial name="pokeball" size={30} />
-              <TxtOption>MINHA POKEDEX</TxtOption>
+              <TxtOption>CAPTURADOS</TxtOption>
+              <ViewIconPress>
+                <IconsFeatherPlus name="chevron-right" size={30} />
+              </ViewIconPress>
+            </BtnOption>
+            <Hr />
+          </ViewOptions>
+
+          <ViewOptions>
+            <BtnOption>
+              <IconsMaterial name="eye" size={30} />
+              <TxtOption>AVISTADOS</TxtOption>
               <ViewIconPress>
                 <IconsFeatherPlus name="chevron-right" size={30} />
               </ViewIconPress>
@@ -64,17 +88,6 @@ const SideBar: React.FC<object> = ({ }) => {
             <BtnOption>
               <IconsMaterial name="star" size={30} />
               <TxtOption>FAVORITOS</TxtOption>
-              <ViewIconPress>
-                <IconsFeatherPlus name="chevron-right" size={30} />
-              </ViewIconPress>
-            </BtnOption>
-            <Hr />
-          </ViewOptions>
-
-          <ViewOptions>
-            <BtnOption>
-              <IconsMaterial name="information-outline" size={30} />
-              <TxtOption>SOBRE</TxtOption>
               <ViewIconPress>
                 <IconsFeatherPlus name="chevron-right" size={30} />
               </ViewIconPress>
