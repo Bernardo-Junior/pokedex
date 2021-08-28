@@ -41,8 +41,6 @@ const Register: React.FC = () => {
 
   const { validateFields } = useContext(UserContext);
 
-  
-
   return (
     <Container>
       <KeyboardAvoidingView

@@ -1,5 +1,6 @@
-import React from 'react';
-import { Container, ContainerInput, Input, styles } from '../../../utils/global';
+import React, { useContext, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import UserContext from '../../../data/contexts/User';
 
 //Importação das imagens
 import textSingin from '../../../assets/images/textSingin.png';
@@ -23,14 +24,10 @@ import {
   LabelBtnConfirm,
   LabelRegister
 } from './styles';
-import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+
+import { Container, ContainerInput, Input, styles } from '../../../utils/global';
+
 import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Alert } from 'react-native';
-import { IUser } from '../../../data/protocols/User';
-import { useContext } from 'react';
-import UserContext from '../../../data/contexts/User';
 
 
 const login: React.FC = () => {

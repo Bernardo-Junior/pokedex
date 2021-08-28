@@ -10,6 +10,19 @@ const UserContext = createContext<IUserContext>({} as IUserContext);
 export const UserProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<IUser | null>(null);
 
+  //Verificar se o usuário está logado
+  useEffect(() => {
+    authenticate();
+  }, [])
+
+  const authenticate = async () => {
+    const resultUser = await AsyncStorage.getItem('@user');
+
+    if(resultUser !== null) {
+      setUser(JSON.parse(resultUser));
+    } 
+  }
+
   //Funções para login
   const signin = async (email: string, password: string) => {
     if (email === "" || password === "") {
@@ -26,6 +39,7 @@ export const UserProvider: React.FC = ({ children }) => {
       if (resultFind) {
         if (resultFind.password === password) {
           setUser(resultFind);
+          await AsyncStorage.setItem('@user', JSON.stringify(resultFind));
           return false;
         } else {
           Alert.alert('OPS!', 'Parece que não existe nenhum usuário com esse email e senha');
@@ -40,6 +54,7 @@ export const UserProvider: React.FC = ({ children }) => {
   }
 
   //Funções para cadastro
+  //Função para validar campos
   const validateFields = (name: string, email: string, password: string) => {
     let regexEmail = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
     if(name === "") {
@@ -55,6 +70,7 @@ export const UserProvider: React.FC = ({ children }) => {
     }
   }
 
+  //Função para cadastrar usuário
   const registerUser = async (name: string, email: string, password: string) => {
     const resultUsers = await AsyncStorage.getItem('@users');
 
@@ -79,7 +95,10 @@ export const UserProvider: React.FC = ({ children }) => {
             newUser
           ]
           try {
-            await AsyncStorage.setItem('@users', JSON.stringify(concatUsers));
+            Promise.all([
+              await AsyncStorage.setItem('@users', JSON.stringify(concatUsers)),
+              await AsyncStorage.setItem('@user', JSON.stringify(resultFind))
+            ])
             setUser(newUser);
             Alert.alert('Sucesso!', 'Conta criada com sucesso, login será automatico dessa vez :)');
           } catch(err) {
