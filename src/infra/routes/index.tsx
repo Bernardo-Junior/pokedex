@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import LoggedOutStack from "./loggedOut";
+import LoggedInStack from "./loggedIn";
+import UserContext from "../../data/contexts/User";
 
 const Routes: React.FC  = () => {
+  const { user } = useContext(UserContext);
   return (
-    <LoggedOutStack />
+    user ? <LoggedInStack /> : <LoggedOutStack />
   )
 }
 
