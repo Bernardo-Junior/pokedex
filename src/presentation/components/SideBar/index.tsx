@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
+import { CommonActions, DrawerActions, useNavigation } from '@react-navigation/native';
 
 //Icones
 import Pokeball from '../../../assets/icons/pokeball.png';
@@ -51,7 +51,18 @@ const SideBar: React.FC<object> = ({ }) => {
           </ViewInfoUser>
 
 
-          <ViewOptions onPress={() => { navigate("Home"), dispatch(DrawerActions.closeDrawer()) }} style={{ marginTop: resp(50) }}>
+          <ViewOptions
+            onPress={() => {
+              dispatch(
+                CommonActions.reset({
+                  routes: [
+                    { name: 'Home' },
+                  ],
+                })
+              );
+            }}
+            style={{ marginTop: resp(50) }}
+          >
             <BtnOption>
               <FontAwesome5 name="book-open" size={25} color="#FFFFFF" />
               <TxtOption>TODOS OS POKEMONS</TxtOption>
@@ -62,7 +73,22 @@ const SideBar: React.FC<object> = ({ }) => {
             <Hr />
           </ViewOptions>
 
-          <ViewOptions>
+          <ViewOptions 
+            onPress={() => {
+              dispatch(
+                CommonActions.reset({
+                  routes: [
+                    {
+                      name: 'PokemonListing',
+                      params: {
+                        titleHeader: "Capturados"
+                      }
+                    },
+                  ],
+                })
+              );
+            }}
+          >
             <BtnOption>
               <IconsMaterial name="pokeball" size={30} />
               <TxtOption>CAPTURADOS</TxtOption>
@@ -73,7 +99,22 @@ const SideBar: React.FC<object> = ({ }) => {
             <Hr />
           </ViewOptions>
 
-          <ViewOptions>
+          <ViewOptions
+              onPress={() => {
+                dispatch(
+                  CommonActions.reset({
+                    routes: [
+                      {
+                        name: 'PokemonListing',
+                        params: {
+                          titleHeader: "Avistados"
+                        }
+                      },
+                    ],
+                  })
+                );
+              }}
+          >
             <BtnOption>
               <IconsMaterial name="eye" size={30} />
               <TxtOption>AVISTADOS</TxtOption>
@@ -84,7 +125,22 @@ const SideBar: React.FC<object> = ({ }) => {
             <Hr />
           </ViewOptions>
 
-          <ViewOptions>
+          <ViewOptions
+            onPress={() => {
+              dispatch(
+                CommonActions.reset({
+                  routes: [
+                    {
+                      name: 'PokemonListing',
+                      params: {
+                        titleHeader: "Favoritos"
+                      }
+                    },
+                  ],
+                })
+              );
+            }}
+          >
             <BtnOption>
               <IconsMaterial name="star" size={30} />
               <TxtOption>FAVORITOS</TxtOption>

@@ -43,9 +43,21 @@ const Header: React.FC<IHeader> = ({ name }) => {
           name === "Todos os Pokemons" ? (
             <Image source={textAll} resizeMode="stretch" />
           ) : name === "Capturados" ? (
-            <Image source={textCaptured} resizeMode="stretch" />
+            <Image 
+              source={textCaptured} 
+              resizeMode="stretch" 
+              style={{
+                width: resp(150)
+              }}
+            />
           ) : name === "Avistados" ? (
-            <Image source={textAvisted} resizeMode="stretch" />
+            <Image 
+              source={textAvisted} 
+              resizeMode="stretch" 
+              style={{
+                width: resp(130)
+              }}
+            />
           ) : name === "Descrição" ? (
             <Image
               source={textDetails}
@@ -55,7 +67,13 @@ const Header: React.FC<IHeader> = ({ name }) => {
               }}
             />
           ) : (
-            <Image source={textFavorites} resizeMode="stretch" />
+            <Image 
+              source={textFavorites} 
+              resizeMode="stretch"
+              style={{
+                width: resp(140)
+              }}
+            />
           )
         }
       </ContainerLabel>
