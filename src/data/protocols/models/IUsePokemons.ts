@@ -59,9 +59,7 @@ export interface IDescriptionPokemon {
   abilities: IAbilities[];
   height: number;
   id: number;
-  location_area_encounters: string;
   name: string;
-  order: number;
   sprites: Sprites;
   species: ISpecies;
   weight: number;

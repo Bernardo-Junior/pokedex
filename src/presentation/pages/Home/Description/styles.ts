@@ -17,8 +17,8 @@ export const ContainerIcons = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export const LabelIcons = styled.Text`
-  font-family: "OpenSans-Regular";
+export const LabelIcons = styled.Text<{verify: boolean}>`
+  font-family: ${props => props.verify ? "OpenSans-Bold" : "OpenSans-Regular"};
 `;
 
 export const Image = styled.Image`

@@ -1,24 +1,24 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import Header from '../../../components/Header';
 
 //Estilização
 import resp from '../../../../utils/responsivity';
-import { 
-  ContainerIcons, 
-  ContainerSubHeader, 
-  LabelIcons, 
-  Image, 
-  ContainerName, 
-  LabelName, 
-  ContainerImagePokemon, 
-  LabelHeight, 
-  ImageLabel, 
-  TextList, 
-  ContainerImageLabel, 
-  ImageLabelWeight, 
-  ImageLabelHeight, 
-  Btn, 
+import {
+  ContainerIcons,
+  ContainerSubHeader,
+  LabelIcons,
+  Image,
+  ContainerName,
+  LabelName,
+  ContainerImagePokemon,
+  LabelHeight,
+  ImageLabel,
+  TextList,
+  ContainerImageLabel,
+  ImageLabelWeight,
+  ImageLabelHeight,
+  Btn,
   ContainerArrow,
   LabelBtn
 } from './styles';
@@ -41,6 +41,7 @@ import { usePokemons } from '../../../../data/hooks/usePokemons';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useMemo } from 'react';
+import UserContext from '../../../../data/contexts/User';
 
 export type RootStackParamList = {
   Params: {
@@ -54,6 +55,7 @@ const DescriptionAllPokemons: React.FC = () => {
   const { fetchDescriptionPokemons } = usePokemons();
   const [descriptions, setDescriptions] = useState<IDescriptionPokemon>({} as IDescriptionPokemon);
   const [abilities, setAbilities] = useState<IAbilities[]>([]);
+  const { pokemonSight, user } = useContext(UserContext);
 
   const { url } = route.params;
 
@@ -81,7 +83,6 @@ const DescriptionAllPokemons: React.FC = () => {
   }
 
   const renderItemsAbility: ListRenderItem<IAbilities> = useCallback(({ item }) => {
-    console.log(item)
     return (
       <TextList>
         {item.ability.name}sadsds
@@ -89,22 +90,33 @@ const DescriptionAllPokemons: React.FC = () => {
     )
   }, [])
 
+  const validateSighted = () => {
+    const resultFind = user?.sighted.find(sight => sight.name.includes(descriptions.name));
+    if (resultFind) {
+      return true
+    }
+    return false
+  }
+
   const renderHeader = useMemo(() => {
     return (
       <>
-      <ContainerArrow>
-        <Btn onPress={() => { goBack() }}>
-          <BackArrow width={resp(35)} height={resp(35)} />
-          <LabelBtn>
-            Voltar
-          </LabelBtn>
-        </Btn>
-      </ContainerArrow>
+        <ContainerArrow>
+          <Btn onPress={() => { goBack() }}>
+            <BackArrow width={resp(35)} height={resp(35)} />
+            <LabelBtn>
+              Voltar
+            </LabelBtn>
+          </Btn>
+        </ContainerArrow>
         <ContainerSubHeader>
-          <ContainerIcons>
+          <ContainerIcons
+            onPress={() => { descriptions && pokemonSight(descriptions) }}
+            disabled={validateSighted()}
+          >
             <Image source={Sighted} resizeMode="contain" />
-            <LabelIcons>
-              Avistei
+            <LabelIcons verify={validateSighted()}>
+              {validateSighted() ? "Já avistado" : "Avistar"}
             </LabelIcons>
           </ContainerIcons>
 
@@ -116,7 +128,7 @@ const DescriptionAllPokemons: React.FC = () => {
 
           <ContainerIcons>
             <Image source={Pokeball} resizeMode="contain" />
-            <LabelIcons>
+            <LabelIcons verify={validateSighted()}>
               Capturar
             </LabelIcons>
           </ContainerIcons>
@@ -136,7 +148,7 @@ const DescriptionAllPokemons: React.FC = () => {
         />
       </>
     )
-  }, [descriptions])
+  }, [descriptions, user?.sighted])
 
   const renderFooter = () => {
     return (
@@ -155,7 +167,7 @@ const DescriptionAllPokemons: React.FC = () => {
           resizeMode="contain"
         />
         <TextList style={{ marginLeft: resp(35) }}>
-          {descriptions?.weight} cm
+          {descriptions?.weight} kg
         </TextList>
 
         <ImageLabelHeight
