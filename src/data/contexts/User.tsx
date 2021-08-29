@@ -171,6 +171,7 @@ export const UserProvider: React.FC = ({ children }) => {
     }
   }
 
+  //Função para capturar o pokemon
   const capturePokemon = async (item: IDescriptionPokemon) => {
     const resultUsers = await AsyncStorage.getItem('@users');
 
@@ -208,9 +209,47 @@ export const UserProvider: React.FC = ({ children }) => {
     }
   }
 
+  //Função para salvar o pokemon como favorito
+  const favoritePokemon = async (item: IDescriptionPokemon) => {
+    const resultUsers = await AsyncStorage.getItem('@users');
+
+    if (resultUsers !== null) {
+      const users: IUser[] = JSON.parse(resultUsers);
+      const resultIndex = users.findIndex(user => user?.email?.includes(user?.email?.toString()));
+
+      
+      if (resultIndex >= 0 && user?.favorites !== undefined) {
+        let userUpdate: IUser = {
+          ...user,
+          favorites: [...user?.favorites, item]
+        }
+
+        users[resultIndex] = userUpdate;
+
+        try {
+          Promise.all([
+            await AsyncStorage.setItem('@users', JSON.stringify(users)),
+            await AsyncStorage.setItem('@user', JSON.stringify(userUpdate))
+          ]);
+          
+          setUser(
+            {
+              ...user,
+              favorites: [...user?.favorites, item]
+            }
+          )
+          return Alert.alert('EBA!', 'O pokemon é um dos seus favoritos agora!');
+        } catch (err) {
+          console.log(err)
+          Alert.alert('OPS!', 'Ocorreu um erro ao salvar o pokemon como avistado, por favor, tente novamente.');
+        }
+      }
+    }
+  }
+
 
   return (
-    <UserContext.Provider value={{ user, signin, validateFields, spotPokemon, capturePokemon }}>
+    <UserContext.Provider value={{ user, signin, validateFields, spotPokemon, capturePokemon, favoritePokemon }}>
       {children}
     </UserContext.Provider>
   )

@@ -57,6 +57,9 @@ const SideBar: React.FC<object> = ({ }) => {
                 CommonActions.reset({
                   routes: [
                     { name: 'Home' },
+                    { name: 'DescriptionAllPokemons' },
+                    { name: 'PokemonListing' },
+                    { name: 'PokemonDetails' }
                   ],
                 })
               );
@@ -73,7 +76,7 @@ const SideBar: React.FC<object> = ({ }) => {
             <Hr />
           </ViewOptions>
 
-          <ViewOptions 
+          <ViewOptions
             onPress={() => {
               dispatch(
                 CommonActions.reset({
@@ -84,6 +87,9 @@ const SideBar: React.FC<object> = ({ }) => {
                         titleHeader: "Capturados"
                       }
                     },
+                    { name: 'Home' },
+                    { name: 'DescriptionAllPokemons' },
+                    { name: 'PokemonDetails' }
                   ],
                 })
               );
@@ -100,20 +106,23 @@ const SideBar: React.FC<object> = ({ }) => {
           </ViewOptions>
 
           <ViewOptions
-              onPress={() => {
-                dispatch(
-                  CommonActions.reset({
-                    routes: [
-                      {
-                        name: 'PokemonListing',
-                        params: {
-                          titleHeader: "Avistados"
-                        }
-                      },
-                    ],
-                  })
-                );
-              }}
+            onPress={() => {
+              dispatch(
+                CommonActions.reset({
+                  routes: [
+                    {
+                      name: 'PokemonListing',
+                      params: {
+                        titleHeader: "Avistados"
+                      }
+                    },
+                    { name: 'Home' },
+                    { name: 'DescriptionAllPokemons' },
+                    { name: 'PokemonDetails' }
+                  ],
+                })
+              );
+            }}
           >
             <BtnOption>
               <IconsMaterial name="eye" size={30} />
@@ -136,6 +145,9 @@ const SideBar: React.FC<object> = ({ }) => {
                         titleHeader: "Favoritos"
                       }
                     },
+                    { name: 'Home' },
+                    { name: 'DescriptionAllPokemons' },
+                    { name: 'PokemonDetails' }
                   ],
                 })
               );

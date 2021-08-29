@@ -15,4 +15,5 @@ export interface IUserContext {
   validateFields(name: string, email: string, password: string): void;
   spotPokemon(item: IDescriptionPokemon): void;
   capturePokemon(item: IDescriptionPokemon): void;
+  favoritePokemon(item: IDescriptionPokemon): void;
 }

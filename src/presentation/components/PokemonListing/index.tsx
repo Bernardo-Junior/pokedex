@@ -70,7 +70,7 @@ const PokemonListing: React.FC = () => {
     return (
       <ContainerList
         style={styles.shadow}
-        onPress={() => { }}
+        onPress={() => { navigate('PokemonDetails', { item, title: titleHeader }) }}
       >
         <ImageList source={{ uri: item.sprites.other['official-artwork'].front_default }} />
         <LabelList>
