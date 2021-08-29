@@ -8,6 +8,7 @@ import textCaptured from '../../../assets/images/textCaptured.png';
 import textRemarks from '../../../assets/images/textAdditionalRemarks.png';
 import textFavorites from '../../../assets/images/textFavorites.png';
 import textAvisted from '../../../assets/images/textAvisted.png';
+import textDetails from '../../../assets/images/textDetails.png';
 
 //Icones
 import Feather from 'react-native-vector-icons/Feather';
@@ -16,7 +17,7 @@ Feather.loadFont();
 // Estilização
 import resp from '../../../utils/responsivity';
 import { styles } from '../../../utils/global';
-import { Btn, ContainerHeader, Image } from './styles';
+import { Btn, ContainerHeader, ContainerLabel, Image } from './styles';
 
 // import { Container } from './styles';
 
@@ -37,6 +38,7 @@ const Header: React.FC<IHeader> = ({ name }) => {
           color="#FFFFFF"
         />
       </Btn>
+      <ContainerLabel>
       {
         name === "Todos os Pokemons" ? (
           <Image source={textAll} resizeMode="stretch" />
@@ -44,10 +46,19 @@ const Header: React.FC<IHeader> = ({ name }) => {
           <Image source={textCaptured} resizeMode="stretch" />
         ) : name === "Avistados" ? (
           <Image source={textAvisted} resizeMode="stretch" />
+        ) : name === "Descrição" ? (
+          <Image 
+            source={textDetails} 
+            resizeMode="stretch" 
+            style={{
+              width: resp(100)
+            }}
+          />
         ) : (
           <Image source={textFavorites} resizeMode="stretch" />
         )
       }
+      </ContainerLabel>
     </ContainerHeader>
   )
 }

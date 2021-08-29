@@ -15,10 +15,6 @@ import { UserProvider } from '../data/contexts/User';
 
 const App: React.FC = () => {
   
-  useEffect(() => {
-    SplashScreen.hide();
-  })
-
   return (
     <NavigationContainer>
       {

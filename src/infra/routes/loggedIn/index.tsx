@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SideBar from '../../../presentation/components/SideBar';
 
 import Home from '../../../presentation/pages/Home';
+import DescriptionAllPokemons from '../../../presentation/pages/Home/Description';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -22,6 +23,7 @@ const DrawerNavigator: React.FC = () => {
       }}
     >
       <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="DescriptionAllPokemons" component={DescriptionAllPokemons} />
     </Drawer.Navigator>
   )
 };

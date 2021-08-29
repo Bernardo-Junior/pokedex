@@ -15,8 +15,14 @@ export const ContainerHeader = styled.SafeAreaView`
 export const Image = styled.Image`
   width: ${resp(220)}px;
   height: ${resp(25)}px;
+  align-self: center;
 `;
 
 export const Btn = styled.TouchableOpacity`
-  right: ${resp(40)}px;
+  position: absolute;
+  left: ${resp(30)}px;
+`;
+
+export const ContainerLabel = styled.View`
+  width: ${resp(300)}px;
 `;

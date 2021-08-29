@@ -19,6 +19,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { IListPokemons, IResult } from '../../../data/protocols/models/IUsePokemons';
 import { useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 // import { Container } from './styles';
 
@@ -28,12 +29,18 @@ const Home: React.FC = () => {
   const [nextUrl, setNextUrl] = useState<string>("/pokemon?offset=0&;amp;limit=20");
   const [loading, setLoading] = useState<Boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
+  const { navigate } = useNavigation();
 
   useEffect(() => {
     fetchPokemonsList();
   }, [])
 
   const fetchPokemonsList = async () => {
+    if(loading) {
+      return;
+    }
+      
+
     setLoading(true);
     const [result, resultError] = await fetchPokemons(nextUrl);
 
@@ -58,16 +65,19 @@ const Home: React.FC = () => {
   }
 
 
-  const renderItems: ListRenderItem<IResult> = ({ item }) => {
+  const renderItems: ListRenderItem<IResult> = useCallback(({ item }) => {
     return (
-      <ContainerList style={styles.shadow}>
+      <ContainerList 
+        style={styles.shadow}
+        onPress={() => { navigate("DescriptionAllPokemons", { url: item.url }) }}
+      >
         <ImageList source={pokeball} />
         <LabelList>
           {item.name}
         </LabelList>
       </ContainerList>
     )
-  }
+  }, [])
 
   const renderHeader = () => {
     return (
@@ -85,7 +95,9 @@ const Home: React.FC = () => {
 
   const renderLoading = () => {
     return (
-      <ActivityIndicator color="#000000" size="small" />
+      <View style={{width: '100%', height: resp(50)}}>
+        <ActivityIndicator color="#000000" size="small" />
+      </View>
     )
   }
 
@@ -109,6 +121,9 @@ const Home: React.FC = () => {
             tintColor={ColorPrimary}
           />
         }
+        removeClippedSubviews
+        maxToRenderPerBatch={5}
+        initialNumToRender={20}
         refreshing={refreshing}
         data={pokemons}
         numColumns={3}

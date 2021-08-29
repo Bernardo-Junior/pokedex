@@ -3,17 +3,25 @@ import React, { createContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Alert } from "react-native";
+import SplashScreen from "react-native-splash-screen";
 import { IUser, IUserContext } from "../protocols/User";
 
 const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<IUser | null>(null);
+  const [verified, setVerified] = useState<Boolean>(false);
 
   //Verificar se o usuário está logado
   useEffect(() => {
     authenticate();
   }, [])
+
+  useEffect(() => {
+    if(verified) {
+      SplashScreen.hide()
+    }
+  }, [verified])
 
   const authenticate = async () => {
     const resultUser = await AsyncStorage.getItem('@user');
@@ -21,6 +29,7 @@ export const UserProvider: React.FC = ({ children }) => {
     if(resultUser !== null) {
       setUser(JSON.parse(resultUser));
     } 
+    setVerified(true);
   }
 
   //Funções para login
