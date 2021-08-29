@@ -26,6 +26,7 @@ export const usePokemons = (): IUsePokemons => {
     await api.get(`${url}`)
       .then(response => {
         resultError = false;
+        resultDescription = response.data;
       })
       .catch(error => {
         console.log(error.response.data);
