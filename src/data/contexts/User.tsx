@@ -131,21 +131,28 @@ export const UserProvider: React.FC = ({ children }) => {
   }
 
   //Função para salvar pokemon avistado
-  const pokemonSight = async (item: IDescriptionPokemon) => {
+  const spotPokemon = async (item: IDescriptionPokemon) => {
     const resultUsers = await AsyncStorage.getItem('@users');
 
     if (resultUsers !== null) {
       const users: IUser[] = JSON.parse(resultUsers);
       const resultIndex = users.findIndex(user => user?.email?.includes(user?.email?.toString()));
 
+      
       if (resultIndex >= 0 && user?.sighted !== undefined) {
-        users[resultIndex] = {
+        let userUpdate = {
           ...user,
           sighted: [...user?.sighted, item]
         }
 
+        users[resultIndex] = userUpdate;
+
         try {
-          await AsyncStorage.setItem('@users', JSON.stringify(users));
+          Promise.all([
+            await AsyncStorage.setItem('@users', JSON.stringify(users)),
+            await AsyncStorage.setItem('@user', JSON.stringify(userUpdate))
+          ]);
+
           setUser(
             {
               ...user,
@@ -161,8 +168,45 @@ export const UserProvider: React.FC = ({ children }) => {
     }
   }
 
+  const capturePokemon = async (item: IDescriptionPokemon) => {
+    const resultUsers = await AsyncStorage.getItem('@users');
+
+    if (resultUsers !== null) {
+      const users: IUser[] = JSON.parse(resultUsers);
+      const resultIndex = users.findIndex(user => user?.email?.includes(user?.email?.toString()));
+
+      
+      if (resultIndex >= 0 && user?.captured !== undefined) {
+        let userUpdate: IUser = {
+          ...user,
+          captured: [...user?.captured, item]
+        }
+
+        users[resultIndex] = userUpdate;
+
+        try {
+          Promise.all([
+            await AsyncStorage.setItem('@users', JSON.stringify(users)),
+            await AsyncStorage.setItem('@user', JSON.stringify(userUpdate))
+          ]);
+          
+          setUser(
+            {
+              ...user,
+              captured: [...user?.captured, item]
+            }
+          )
+          return Alert.alert('EBA!', 'O pokemon foi capturado!');
+        } catch (err) {
+          console.log(err)
+          Alert.alert('OPS!', 'Ocorreu um erro ao salvar o pokemon como avistado, por favor, tente novamente.');
+        }
+      }
+    }
+  }
+
   return (
-    <UserContext.Provider value={{ user, signin, validateFields, pokemonSight }}>
+    <UserContext.Provider value={{ user, signin, validateFields, spotPokemon, capturePokemon }}>
       {children}
     </UserContext.Provider>
   )

@@ -13,5 +13,6 @@ export interface IUserContext {
   user: IUser | null;
   signin(email: string, password: string): Promise<boolean>;
   validateFields(name: string, email: string, password: string): void;
-  pokemonSight(item: IDescriptionPokemon): void;
+  spotPokemon(item: IDescriptionPokemon): void;
+  capturePokemon(item: IDescriptionPokemon): void;
 }

@@ -55,7 +55,7 @@ const DescriptionAllPokemons: React.FC = () => {
   const { fetchDescriptionPokemons } = usePokemons();
   const [descriptions, setDescriptions] = useState<IDescriptionPokemon>({} as IDescriptionPokemon);
   const [abilities, setAbilities] = useState<IAbilities[]>([]);
-  const { pokemonSight, user } = useContext(UserContext);
+  const { spotPokemon, user, capturePokemon } = useContext(UserContext);
 
   const { url } = route.params;
 
@@ -91,7 +91,15 @@ const DescriptionAllPokemons: React.FC = () => {
   }, [])
 
   const validateSighted = () => {
-    const resultFind = user?.sighted.find(sight => sight.name.includes(descriptions.name));
+    const resultFind = user?.sighted.find(pokemon => pokemon.name.includes(descriptions.name));
+    if (resultFind) {
+      return true
+    }
+    return false
+  }
+
+  const validateCaptured = () => {
+    const resultFind = user?.captured.find(pokemon => pokemon.name.includes(descriptions.name));
     if (resultFind) {
       return true
     }
@@ -111,7 +119,7 @@ const DescriptionAllPokemons: React.FC = () => {
         </ContainerArrow>
         <ContainerSubHeader>
           <ContainerIcons
-            onPress={() => { descriptions && pokemonSight(descriptions) }}
+            onPress={() => { descriptions && spotPokemon(descriptions) }}
             disabled={validateSighted()}
           >
             <Image source={Sighted} resizeMode="contain" />
@@ -126,10 +134,13 @@ const DescriptionAllPokemons: React.FC = () => {
             </LabelName>
           </ContainerName>
 
-          <ContainerIcons>
+          <ContainerIcons 
+            disabled={validateCaptured()}
+            onPress={() => { descriptions && capturePokemon(descriptions) }}
+          >
             <Image source={Pokeball} resizeMode="contain" />
-            <LabelIcons verify={validateSighted()}>
-              Capturar
+            <LabelIcons verify={validateCaptured()}>
+            {validateCaptured() ? "Capturado" : "Capturar"}
             </LabelIcons>
           </ContainerIcons>
         </ContainerSubHeader>
@@ -148,7 +159,7 @@ const DescriptionAllPokemons: React.FC = () => {
         />
       </>
     )
-  }, [descriptions, user?.sighted])
+  }, [descriptions, user?.sighted, user?.captured])
 
   const renderFooter = () => {
     return (
