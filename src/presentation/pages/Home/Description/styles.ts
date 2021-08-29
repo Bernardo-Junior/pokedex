@@ -79,3 +79,19 @@ export const ImageLabelWeight = styled.Image`
 export const ImageLabelHeight = styled(ImageLabelWeight)`
   width: ${resp(108)}px;
 `;
+
+export const ContainerArrow = styled.SafeAreaView`
+  width: 85%;
+  align-self: center;
+  margin-bottom: ${resp(15)}px;
+`;
+
+export const Btn = styled.TouchableOpacity`
+  flex-direction: row;
+
+  align-items: center;
+`;
+
+export const LabelBtn = styled.Text`
+  font-family: "OpenSans-Bold";
+`;

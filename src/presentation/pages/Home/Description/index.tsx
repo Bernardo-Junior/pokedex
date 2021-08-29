@@ -1,15 +1,33 @@
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import React, { useCallback } from 'react';
 import Header from '../../../components/Header';
 
 //Estilização
 import resp from '../../../../utils/responsivity';
-import { ContainerIcons, ContainerSubHeader, LabelIcons, Image, ContainerName, LabelName, ContainerImagePokemon, LabelHeight, ImageLabel, TextList, ContainerImageLabel, ImageLabelWeight, ImageLabelHeight } from './styles';
+import { 
+  ContainerIcons, 
+  ContainerSubHeader, 
+  LabelIcons, 
+  Image, 
+  ContainerName, 
+  LabelName, 
+  ContainerImagePokemon, 
+  LabelHeight, 
+  ImageLabel, 
+  TextList, 
+  ContainerImageLabel, 
+  ImageLabelWeight, 
+  ImageLabelHeight, 
+  Btn, 
+  ContainerArrow,
+  LabelBtn
+} from './styles';
 import { Container, errorFunction } from '../../../../utils/global';
 
 //Icones
 import Sighted from '../../../../assets/icons/sighted.png';
 import Pokeball from '../../../../assets/icons/pokeball.png';
+import BackArrow from '../../../../assets/icons/arrowBack.svg';
 
 //Imagens
 import textSpecies from '../../../../assets/images/textSpecies.png';
@@ -32,6 +50,7 @@ export type RootStackParamList = {
 
 const DescriptionAllPokemons: React.FC = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'Params'>>();
+  const { goBack } = useNavigation();
   const { fetchDescriptionPokemons } = usePokemons();
   const [descriptions, setDescriptions] = useState<IDescriptionPokemon>({} as IDescriptionPokemon);
   const [abilities, setAbilities] = useState<IAbilities[]>([]);
@@ -73,6 +92,14 @@ const DescriptionAllPokemons: React.FC = () => {
   const renderHeader = useMemo(() => {
     return (
       <>
+      <ContainerArrow>
+        <Btn onPress={() => { goBack() }}>
+          <BackArrow width={resp(35)} height={resp(35)} />
+          <LabelBtn>
+            Voltar
+          </LabelBtn>
+        </Btn>
+      </ContainerArrow>
         <ContainerSubHeader>
           <ContainerIcons>
             <Image source={Sighted} resizeMode="contain" />

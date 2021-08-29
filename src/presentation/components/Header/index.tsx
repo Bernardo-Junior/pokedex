@@ -39,25 +39,25 @@ const Header: React.FC<IHeader> = ({ name }) => {
         />
       </Btn>
       <ContainerLabel>
-      {
-        name === "Todos os Pokemons" ? (
-          <Image source={textAll} resizeMode="stretch" />
-        ) : name === "Capturados" ? (
-          <Image source={textCaptured} resizeMode="stretch" />
-        ) : name === "Avistados" ? (
-          <Image source={textAvisted} resizeMode="stretch" />
-        ) : name === "Descrição" ? (
-          <Image 
-            source={textDetails} 
-            resizeMode="stretch" 
-            style={{
-              width: resp(100)
-            }}
-          />
-        ) : (
-          <Image source={textFavorites} resizeMode="stretch" />
-        )
-      }
+        {
+          name === "Todos os Pokemons" ? (
+            <Image source={textAll} resizeMode="stretch" />
+          ) : name === "Capturados" ? (
+            <Image source={textCaptured} resizeMode="stretch" />
+          ) : name === "Avistados" ? (
+            <Image source={textAvisted} resizeMode="stretch" />
+          ) : name === "Descrição" ? (
+            <Image
+              source={textDetails}
+              resizeMode="stretch"
+              style={{
+                width: resp(100)
+              }}
+            />
+          ) : (
+            <Image source={textFavorites} resizeMode="stretch" />
+          )
+        }
       </ContainerLabel>
     </ContainerHeader>
   )
