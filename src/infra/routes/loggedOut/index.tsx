@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 
 //Stack para usuário não logado
 import Login from '../../../presentation/pages/login';
@@ -13,6 +13,8 @@ const LoggedOutStack: React.FC = () => {
     <Stack.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
+        gestureDirection: 'horizontal',
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       })}
       initialRouteName="Login"
     >

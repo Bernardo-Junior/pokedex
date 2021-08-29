@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { IHeader } from '../../../data/protocols/Header';
 
@@ -81,4 +81,4 @@ const Header: React.FC<IHeader> = ({ name }) => {
   )
 }
 
-export default Header;
+export default memo(Header);

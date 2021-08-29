@@ -85,7 +85,7 @@ const DescriptionAllPokemons: React.FC = () => {
   const renderItemsAbility: ListRenderItem<IAbilities> = useCallback(({ item }) => {
     return (
       <TextList>
-        {item.ability.name}sadsds
+        {item.ability.name}
       </TextList>
     )
   }, [])

@@ -1,5 +1,6 @@
 import { TextInput } from "react-native";
 import styled from "styled-components/native";
+import { ColorPrimary } from "../../../utils/global";
 
 import resp from '../../../utils/responsivity';
 
@@ -13,6 +14,12 @@ export const ContainerInput = styled.View`
   margin-top: ${resp(10)}px;
   border-radius: ${resp(7)}px;
   flex-direction: row;
+  margin-bottom: ${resp(15)}px;
+`;
+
+export const ContainerMainInput = styled.View`
+  width: 100%;
+  background-color: ${ColorPrimary};
 `;
 
 export const Input = styled(TextInput)`

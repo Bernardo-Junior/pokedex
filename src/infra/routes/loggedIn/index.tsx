@@ -1,6 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createStackNavigator } from '@react-navigation/stack';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 
 import SideBar from '../../../presentation/components/SideBar';
 
@@ -25,7 +25,7 @@ const DrawerNavigator: React.FC = () => {
     >
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="DescriptionAllPokemons" component={DescriptionAllPokemons} />
-      <Stack.Screen name="PokemonListing" component={PokemonListing} />
+      <Drawer.Screen name="PokemonListing" component={PokemonListing} />
     </Drawer.Navigator>
   )
 };
@@ -35,6 +35,8 @@ const LoggedInStack: React.FC = () => {
     <Stack.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
+        gestureDirection: 'horizontal',
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       })}
     >
       <Stack.Screen name="Home" component={DrawerNavigator} />

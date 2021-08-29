@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ActivityIndicator, FlatList, ListRenderItem, RefreshControl, View } from 'react-native';
 import { ColorPrimary, Container, errorFunction, styles } from '../../../utils/global';
 import Header from '../../components/Header';
 
 //Estilização 
-import { ContainerInput, ContainerList, Hr, ImageList, Input, LabelList } from './styles';
+import { ContainerInput, ContainerList, ContainerMainInput, Hr, ImageList, Input, LabelList } from './styles';
 import resp from '../../../utils/responsivity';
 
 //Icones
@@ -17,9 +17,10 @@ import pokeball from '../../../assets/icons/pokeball.png';
 import { usePokemons } from '../../../data/hooks/usePokemons';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { IListPokemons, IResult } from '../../../data/protocols/models/IUsePokemons';
+import { IDescriptionPokemon, IListPokemons, IResult } from '../../../data/protocols/models/IUsePokemons';
 import { useCallback } from 'react';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import UserContext from '../../../data/contexts/User';
 
 // import { Container } from './styles';
 
@@ -32,54 +33,46 @@ export type RootStackParamList = {
 const PokemonListing: React.FC = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'Params'>>();
   const { titleHeader } = route.params;
-  const { fetchPokemons, fetchDescriptionPokemons } = usePokemons();
-  const [pokemons, setPokemons] = useState<IResult[]>([]);
+  const { user } = useContext(UserContext);
+  const [namePokemon, setNamePokemon] = useState<string>("");
+  const [pokemons, setPokemons] = useState<IDescriptionPokemon[] | []>([]);
+  const [pokemonsCopy, setPokemonsCopy] = useState<IDescriptionPokemon[] | []>([]);
   const [nextUrl, setNextUrl] = useState<string>("/pokemon?offset=0&;amp;limit=20");
-  const [loading, setLoading] = useState<Boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const { navigate } = useNavigation();
 
   useEffect(() => {
-    fetchPokemonsList();
+    verifyScreen();
   }, [])
 
-  const fetchPokemonsList = async () => {
-    if(loading) {
-      return;
-    }
-      
-
-    setLoading(true);
-    const [result, resultError] = await fetchPokemons(nextUrl);
-
-    if (!resultError) {
-      if (!refreshing) {
-        setPokemons([...pokemons, ...result.results]);
-      } else {
-        setPokemons(result.results);
+  const verifyScreen = () => {
+    if (titleHeader === "Capturados") {
+      if (user?.captured !== undefined) {
+        setPokemons(user?.captured);
+        setPokemonsCopy(user?.captured);
       }
-      setNextUrl(result.next);
+    } else if (titleHeader === "Favoritos") {
+      if (user?.favorites !== undefined) {
+        setPokemons(user?.favorites);
+        setPokemonsCopy(user?.favorites);
+      }
     } else {
-      errorFunction(
-        "Erro de Conexão",
-        "Ocorreu um erro ao carregar os pokemons",
-        () => {
-          fetchPokemonsList()
-        },
-      )
+      if (user?.sighted !== undefined) {
+        setPokemons(user?.sighted);
+        setPokemonsCopy(user?.sighted);
+      }
     }
-    setRefreshing(false);
-    setLoading(false);
   }
 
 
-  const renderItems: ListRenderItem<IResult> = useCallback(({ item }) => {
+
+  const renderItems: ListRenderItem<IDescriptionPokemon> = useCallback(({ item }) => {
     return (
-      <ContainerList 
+      <ContainerList
         style={styles.shadow}
-        onPress={() => { navigate("DescriptionAllPokemons", { url: item.url }) }}
+        onPress={() => { }}
       >
-        <ImageList source={pokeball} />
+        <ImageList source={{ uri: item.sprites.other['official-artwork'].front_default }} />
         <LabelList>
           {item.name}
         </LabelList>
@@ -89,58 +82,47 @@ const PokemonListing: React.FC = () => {
 
   const renderHeader = () => {
     return (
-      <ContainerInput
-        style={styles.shadow}
-      >
-        <Input
-          placeholder="Pesquise por nome"
-        />
-        <Hr />
-        <Feather name="search" size={resp(30)} color={"#D5D3D3"} />
-      </ContainerInput>
+      <ContainerMainInput>
+        <ContainerInput
+          style={styles.shadow}
+        >
+          <Input
+            placeholder="Pesquise por nome"
+            onChangeText={value => { setNamePokemon(value), searchPokemon(value) }}
+            value={namePokemon}
+            autoCapitalize={"none"}
+            autoCorrect={false}
+          />
+          <Hr />
+          <Feather style={{ marginRight: resp(10) }} name="search" size={resp(30)} color={"#D5D3D3"} />
+        </ContainerInput>
+      </ContainerMainInput>
     )
   }
 
-  const renderLoading = () => {
-    return (
-      <View style={{width: '100%', height: resp(50)}}>
-        <ActivityIndicator color="#000000" size="small" />
-      </View>
-    )
-  }
+  const searchPokemon = (name: string) => {
+    const result = pokemonsCopy.filter(pokemon => pokemon.name.includes(name));
 
-  function _onRefresh() {
-    setRefreshing(true);
-    setNextUrl("/pokemon?offset=0&;amp;limit=20")
-    fetchPokemonsList();
+    if (result) {
+      setPokemons(result);
+    }
   }
 
   return (
     <Container style={{ backgroundColor: "#FFFFFF" }}>
       <Header name={`${titleHeader}`} />
 
+      {renderHeader()}
+
       <FlatList
-        // ListHeaderComponent={renderHeader}
-        refreshControl={
-          <RefreshControl
-            collapsable={true}
-            refreshing={refreshing}
-            onRefresh={_onRefresh.bind(this)}
-            tintColor={ColorPrimary}
-          />
-        }
         removeClippedSubviews
         maxToRenderPerBatch={5}
         initialNumToRender={20}
-        refreshing={refreshing}
         data={pokemons}
         numColumns={3}
         keyExtractor={pokemon => pokemon.name}
         renderItem={renderItems}
-        onEndReachedThreshold={nextUrl === null ? null : 1}
-        onEndReached={(info: { distanceFromEnd: number }) => { nextUrl === null ? null : fetchPokemonsList() }}
         contentContainerStyle={{ alignItems: 'center', marginTop: resp(10) }}
-        ListFooterComponent={loading && renderLoading}
       />
 
     </Container>

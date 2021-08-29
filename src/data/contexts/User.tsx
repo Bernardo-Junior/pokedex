@@ -107,7 +107,7 @@ export const UserProvider: React.FC = ({ children }) => {
         try {
           Promise.all([
             await AsyncStorage.setItem('@users', JSON.stringify(concatUsers)),
-            await AsyncStorage.setItem('@user', JSON.stringify(resultFind))
+            await AsyncStorage.setItem('@user', JSON.stringify(newUser))
           ])
           setUser(newUser);
           Alert.alert('Sucesso!', 'Conta criada com sucesso, login será automatico dessa vez :)');
@@ -120,7 +120,10 @@ export const UserProvider: React.FC = ({ children }) => {
         newUser
       ]
       try {
-        await AsyncStorage.setItem('@users', JSON.stringify(concatUsers));
+        Promise.all([
+          await AsyncStorage.setItem('@users', JSON.stringify(concatUsers)),
+          await AsyncStorage.setItem('@user', JSON.stringify(newUser))
+        ])
         setUser(newUser);
         Alert.alert('Sucesso!', 'Conta criada com sucesso, login será automatico dessa vez :)');
       } catch (err) {
@@ -204,6 +207,7 @@ export const UserProvider: React.FC = ({ children }) => {
       }
     }
   }
+
 
   return (
     <UserContext.Provider value={{ user, signin, validateFields, spotPokemon, capturePokemon }}>
