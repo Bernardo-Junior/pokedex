@@ -124,12 +124,27 @@ const Observations: React.FC = () => {
   }
 
   const renderItems = (item: IObject, type: string) => {
+
     return (
-      <ContainerList onPress={() => { setItemOptions(item), setTypeOption(type), setVisibleOptions(true) }}>
+      <ContainerList
+        onPress={() => {
+          setCount(count => count + 1),
+            setItemOptions(item),
+            setTypeOption(type),
+            setVisibleOptions(true)
+        }}
+      >
         <LabelList>
           {item.value}
         </LabelList>
-        <ButtonOptions onPress={() => { setItemOptions(item), setVisibleOptions(true) }}>
+        <ButtonOptions
+          onPress={() => {
+            setCount(count => count + 1),
+              setItemOptions(item),
+              setTypeOption(type),
+              setVisibleOptions(true)
+          }}
+        >
           <Configurations width={resp(20)} height={resp(20)} />
         </ButtonOptions>
       </ContainerList>
@@ -139,15 +154,21 @@ const Observations: React.FC = () => {
   //Funções para remover dados da lista
   const removeInput = (type: string, item: IObject) => {
     var result = false;
-    if (type === "Observações") {
-      result =  removeObservations(item);
-    } else if (type === "Alimentação") {
-      result =  removeFoods(item);
-    } else if (type === "Curiosidades") {
-      result =  removeCuriosities(item);
-    } else {
-      return false;
+
+    switch (type) {
+      case "Observações":
+        result = removeObservations(item);
+        break;
+      case "Alimentação":
+        result = removeFoods(item);
+        break;
+      case "Curiosidades":
+        result = removeCuriosities(item);
+        break;
+      default:
+        return false;
     }
+
     return result;
   }
 
@@ -156,7 +177,7 @@ const Observations: React.FC = () => {
 
     if (resultIndex >= 0) {
       descriptions.comments.otherCuriosities.splice(resultIndex, 1);
-      setCount(count => count+1);
+      setCount(count => count + 1);
       return true;
     } else {
       return false;
@@ -172,7 +193,7 @@ const Observations: React.FC = () => {
 
     if (resultIndex >= 0) {
       descriptions.comments.Foods.splice(resultIndex, 1);
-      setCount(count => count+1);
+      setCount(count => count + 1);
       return true;
     } else {
       return false;
@@ -184,7 +205,7 @@ const Observations: React.FC = () => {
 
     if (resultIndex >= 0) {
       descriptions.comments.habitats.splice(resultIndex, 1);
-      setCount(count => count+1);
+      setCount(count => count + 1);
       return true;
     } else {
       return false;
@@ -194,38 +215,43 @@ const Observations: React.FC = () => {
   //Funções para editar uma informação da lista
   const editInput = (type: string, item: IObject, value: string) => {
     var result = false;
-    if (type == "Observações") {
-      result = editObservations(item, value);
-    } else if (type == "Alimentação") {
-      result = editFoods(item, value);
-    } else if (type == "Curiosidades") {
-      result = editCuriosities(item, value);
-    } else {
-      return false;
+
+    switch (type) {
+      case "Observações":
+        result = editObservations(item, value);
+        break;
+      case "Alimentação":
+        result = editFoods(item, value);
+        break;
+      case "Curiosidades":
+        result = editCuriosities(item, value);
+        break;
+      default:
+        return false;
     }
 
     return result;
   }
 
   const editCuriosities = (item: IObject, value: string) => {
-    const resultIndex = descriptions.comments.otherCuriosities.findIndex(habitat => habitat.id === item.id);
+    const resultIndex = descriptions.comments.otherCuriosities.findIndex(habitat => habitat.id == item.id);
 
     if (resultIndex >= 0) {
       descriptions.comments.otherCuriosities[resultIndex].value = value;
-      setCount(count => count+1);
+      setCount(count => count + 1);
       return true;
     } else {
       return false;
     }
-    
+
   }
 
   const editFoods = (item: IObject, value: string) => {
-    const resultIndex = descriptions.comments.Foods.findIndex(food => food.id === item.id);
+    const resultIndex = descriptions.comments.Foods.findIndex(food => food.id == item.id);
 
     if (resultIndex >= 0) {
       descriptions.comments.Foods[resultIndex].value = value;
-      setCount(count => count+1);
+      setCount(count => count + 1);
       return true;
     } else {
       return false;
@@ -233,11 +259,11 @@ const Observations: React.FC = () => {
   }
 
   const editObservations = (item: IObject, value: string) => {
-    const resultIndex = descriptions.comments.habitats.findIndex(observation => observation.id === item.id);
+    const resultIndex = descriptions.comments.habitats.findIndex(observation => observation.id == item.id);
 
     if (resultIndex >= 0) {
       descriptions.comments.habitats[resultIndex].value = value;
-      setCount(count => count+1);
+      setCount(count => count + 1);
       return true;
     } else {
       return false;
@@ -246,14 +272,15 @@ const Observations: React.FC = () => {
 
   //Funções para salvar informações na lista
   const saveInput = (type: string) => {
-    if (type === "Observações") {
-      return saveObservations();
-    } else if (type === "Alimentação") {
-      return saveFoods();
-    } else if (type === "Curiosidade") {
-      return saveCuriosities();
-    } else {
-      return;
+    switch (type) {
+      case "Observações":
+        return saveObservations();
+      case "Alimentação":
+        return saveFoods();
+      case "Curiosidade":
+        return saveCuriosities();
+      default:
+        return;
     }
   }
 
@@ -262,7 +289,7 @@ const Observations: React.FC = () => {
       id: (Math.random() * (9999 - 1) + 1),
       value: curiosities
     });
-    setCount(count => count+1);
+    setCount(count => count + 1);
     setCuriosities("");
     setVisibleModal(false);
   }
@@ -272,7 +299,7 @@ const Observations: React.FC = () => {
       id: (Math.random() * (9999 - 1) + 1),
       value: food
     });
-    setCount(count => count+1);
+    setCount(count => count + 1);
     setFood("");
     setVisibleModal(false);
   }
@@ -282,7 +309,7 @@ const Observations: React.FC = () => {
       id: (Math.random() * (9999 - 1) + 1),
       value: habitat
     });
-    setCount(count => count+1);
+    setCount(count => count + 1);
     setHabitat("");
     setVisibleModal(false);
   }
@@ -313,6 +340,7 @@ const Observations: React.FC = () => {
           type={typeOptions}
           editInput={editInput}
           removeInput={removeInput}
+          count={count}
         />
         <ScrollView>
 

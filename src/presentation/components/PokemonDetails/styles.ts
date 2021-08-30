@@ -71,6 +71,7 @@ export const TextList = styled.Text`
 export const ContainerImageLabel = styled.View`
   width: ${resp(411)}px;
   margin-top: ${resp(15)}px;
+  margin-bottom: ${resp(50)}px;
 `;
 
 export const ImageLabelWeight = styled.Image`

@@ -9,4 +9,5 @@ export interface IModalOptions {
   type: string;
   editInput(type: string, item: IObject, value: string): boolean;
   removeInput(type: string, item: IObject): boolean;
+  count: number;
 }

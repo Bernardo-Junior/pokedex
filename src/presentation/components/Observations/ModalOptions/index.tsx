@@ -23,16 +23,16 @@ import {
   ButtonSave
 } from './styles';
 
-const ModalOptions: React.FC<IModalOptions> = ({removeInput ,editInput, name, item, visible, setVisible, type }) => {
+const ModalOptions: React.FC<IModalOptions> = ({removeInput ,editInput, name, item, visible, setVisible, type, count }) => {
   const [value, setValue] = useState<string>("");
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   useEffect(() => {
     setValue(item.value);
-  }, [visible])
+  }, [count])
 
   const sendEdit = () => {
-    
+   
    const result = editInput(type, item, value);
 
    if(result) {
