@@ -196,29 +196,35 @@ const Observations: React.FC = () => {
   }
 
   const editCuriosities = (item: IObject, value: string) => {
+    console.log("C"+value);
     const resultIndex = descriptions.comments.otherCuriosities.findIndex(habitat => habitat.id === item.id);
 
     if (resultIndex >= 0) {
       descriptions.comments.otherCuriosities[resultIndex].value = value;
     }
+    setVisibleOptions(false);
     setCount(count => count+1);
   }
 
   const editFoods = (item: IObject, value: string) => {
+    console.log("F"+value);
     const resultIndex = descriptions.comments.Foods.findIndex(food => food.id === item.id);
 
     if (resultIndex >= 0) {
       descriptions.comments.Foods[resultIndex].value = value;
     }
+    setVisibleOptions(false);
     setCount(count => count+1);
   }
 
   const editObservations = (item: IObject, value: string) => {
+    console.log("O"+value);
     const resultIndex = descriptions.comments.habitats.findIndex(observation => observation.id === item.id);
 
     if (resultIndex >= 0) {
       descriptions.comments.habitats[resultIndex].value = value;
     }
+    setVisibleOptions(false);
     setCount(count => count+1);
   }
 

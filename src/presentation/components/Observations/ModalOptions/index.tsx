@@ -65,7 +65,6 @@ const ModalOptions: React.FC<IModalOptions> = ({removeInput ,editInput, name, it
                       style={styles.shadow}
                       onPress={() => {
                         setIsEdit(false);
-                        setVisible(false);
                         editInput(type, item, value);
                       }}
                     >
