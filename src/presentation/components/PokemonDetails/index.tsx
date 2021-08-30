@@ -1,9 +1,13 @@
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import React, { useCallback, useContext } from 'react';
+import { IAbilities, IDescriptionPokemon, ISpecies } from '../../../data/protocols/models/IUsePokemons';
+import UserContext from '../../../data/contexts/User';
 import Header from '../../components/Header';
+
 
 //Estilização
 import resp from '../../../utils/responsivity';
+import { FlatList, ListRenderItem } from 'react-native';
 import {
   ContainerIcons,
   ContainerSubHeader,
@@ -38,13 +42,6 @@ import textSkills from '../../../assets/images/textSkills.png';
 import textWeight from '../../../assets/images/textWeight.png';
 import textHeight from '../../../assets/images/textHeight.png';
 
-import { FlatList, ListRenderItem } from 'react-native';
-import { IAbilities, IDescriptionPokemon, ISpecies } from '../../../data/protocols/models/IUsePokemons';
-import { usePokemons } from '../../../data/hooks/usePokemons';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useMemo } from 'react';
-import UserContext from '../../../data/contexts/User';
 
 export type RootStackParamList = {
   Params: {
@@ -117,6 +114,7 @@ const PokemonDetails: React.FC = () => {
             title === "Capturados" && (
               <ContainerIcons
                 onPress={() => { descriptions && favoritePokemon(descriptions) }}
+                disabled={validateCaptured()}
               >
                 {
                   validateCaptured() ? (
