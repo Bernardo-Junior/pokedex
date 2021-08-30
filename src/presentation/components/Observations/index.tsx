@@ -196,7 +196,6 @@ const Observations: React.FC = () => {
   }
 
   const editCuriosities = (item: IObject, value: string) => {
-    console.log("C"+value);
     const resultIndex = descriptions.comments.otherCuriosities.findIndex(habitat => habitat.id === item.id);
 
     if (resultIndex >= 0) {
@@ -207,7 +206,6 @@ const Observations: React.FC = () => {
   }
 
   const editFoods = (item: IObject, value: string) => {
-    console.log("F"+value);
     const resultIndex = descriptions.comments.Foods.findIndex(food => food.id === item.id);
 
     if (resultIndex >= 0) {
@@ -218,7 +216,6 @@ const Observations: React.FC = () => {
   }
 
   const editObservations = (item: IObject, value: string) => {
-    console.log("O"+value);
     const resultIndex = descriptions.comments.habitats.findIndex(observation => observation.id === item.id);
 
     if (resultIndex >= 0) {
