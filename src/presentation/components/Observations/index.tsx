@@ -51,6 +51,7 @@ import ModalInput from './ModalInput';
 import { useState } from 'react';
 import { ListRenderItem } from 'react-native';
 import { useEffect } from 'react';
+import ModalOptions from './ModalOptions';
 
 
 export type RootStackParamList = {
@@ -70,8 +71,11 @@ const Observations: React.FC = () => {
   const [food, setFood] = useState<string>("");
   const [curiosities, setCuriosities] = useState<string>("");
   const [visibleModal, setVisibleModal] = useState<boolean>(false);
+  const [visibleOptions, setVisibleOptions] = useState<boolean>(false);
   const [placeholder, setPlaceholder] = useState<string>("");
   const [type, setType] = useState<string>("");
+  const [typeOptions, setTypeOption] = useState<string>("");
+  const [itemOptions, setItemOptions] = useState<IObject>({} as IObject);
 
   useEffect(() => {
     setLocalization(descriptions.comments.place.toString());
@@ -118,17 +122,104 @@ const Observations: React.FC = () => {
     )
   }
 
-  const renderItems = (item: IObject) => {
+  const renderItems = (item: IObject, type: string) => {
     return (
-      <ContainerList>
+      <ContainerList onPress={() => { setItemOptions(item), setTypeOption(type), setVisibleOptions(true) }}>
         <LabelList>
           {item.value}
         </LabelList>
-        <ButtonOptions>
+        <ButtonOptions onPress={() => { setItemOptions(item), setVisibleOptions(true) }}>
           <Configurations width={resp(20)} height={resp(20)} />
         </ButtonOptions>
       </ContainerList>
     )
+  }
+
+  const removeInput = (type: string, item: IObject) => {
+    if (type === "Observações") {
+      return removeObservations(item);
+    } else if (type === "Alimentação") {
+      return removeFoods(item);
+    } else if (type === "Curiosidades") {
+      return removeCuriosities(item);
+    } else {
+      return;
+    }
+  }
+
+  const removeCuriosities = (item: IObject) => {
+    const resultIndex = descriptions.comments.otherCuriosities.findIndex(habitat => habitat.id === item.id);
+
+    if(resultIndex >= 0) {
+      descriptions.comments.habitats.splice(resultIndex, 1);
+    }
+    setVisibleOptions(false);
+  }
+
+  const removeFoods = (item: IObject) => {
+    const resultIndex = descriptions.comments.Foods.findIndex(habitat => habitat.id === item.id);
+
+    if(resultIndex >= 0) {
+      descriptions.comments.Foods.splice(resultIndex, 1);
+    }
+    setVisibleOptions(false);
+  }
+
+  const removeObservations = (item: IObject) => {
+    const resultIndex = descriptions.comments.habitats.findIndex(habitat => habitat.id === item.id);
+
+    if(resultIndex >= 0) {
+      descriptions.comments.habitats.splice(resultIndex, 1);
+    }
+    setVisibleOptions(false);
+  }
+
+  const editInput = (type: string, item: IObject, value: string) => {
+    if (type === "Observações") {
+      return editObservations(item, value);
+    } else if (type === "Alimentação") {
+      return editFoods(item, value);
+    } else if (type === "Curiosidades") {
+      return editCuriosities(item, value);
+    } else {
+      return;
+    }
+  }
+
+  const editCuriosities = (item: IObject, value: string) => {
+    const resultIndex = descriptions.comments.otherCuriosities.findIndex(habitat => habitat.id === item.id);
+
+    if(resultIndex >= 0) {
+      descriptions.comments.otherCuriosities[resultIndex] = {
+        id: (Math.random() * (9999 - 1) + 1),
+        value: value
+      }
+    }
+    setVisibleOptions(false);
+  }
+
+  const editFoods = (item: IObject, value: string) => {
+    const resultIndex = descriptions.comments.Foods.findIndex(habitat => habitat.id === item.id);
+
+    if(resultIndex >= 0) {
+      descriptions.comments.Foods[resultIndex] = {
+        id: (Math.random() * (9999 - 1) + 1),
+        value: value
+      }
+    }
+    setVisibleOptions(false);
+  }
+
+  const editObservations = (item: IObject, value: string) => {
+    const resultIndex = descriptions.comments.habitats.findIndex(habitat => habitat.id === item.id);
+
+    if(resultIndex >= 0) {
+      descriptions.comments.habitats[resultIndex] = {
+        id: (Math.random() * (9999 - 1) + 1),
+        value: value
+      }
+    }
+    setVisibleOptions(false);
   }
 
   const saveInput = (type: string) => {
@@ -188,6 +279,16 @@ const Observations: React.FC = () => {
           visible={visibleModal}
           saveInput={saveInput}
         />
+
+        <ModalOptions 
+          item={itemOptions}
+          name=""
+          setVisible={setVisibleOptions}
+          visible={visibleOptions}
+          type={typeOptions}
+          editInput={editInput}
+          removeInput={removeInput}
+        />
         <ScrollView>
 
           {subHeader()}
@@ -214,7 +315,7 @@ const Observations: React.FC = () => {
             descriptions.comments.habitats.map(item => {
               return (
                 <ContainerMap key={item.id}>
-                  {renderItems(item)}
+                  {renderItems(item, "Observações")}
                 </ContainerMap>
               )
             })
@@ -249,7 +350,7 @@ const Observations: React.FC = () => {
             descriptions.comments.Foods.map(item => {
               return (
                 <ContainerMap key={item.id}>
-                  {renderItems(item)}
+                  {renderItems(item, "Alimentação")}
                 </ContainerMap>
               )
             })
@@ -273,7 +374,7 @@ const Observations: React.FC = () => {
             descriptions.comments.otherCuriosities.map(item => {
               return (
                 <ContainerMap key={item.id}>
-                  {renderItems(item)}
+                  {renderItems(item, "Curiosidades")}
                 </ContainerMap>
               )
             })
