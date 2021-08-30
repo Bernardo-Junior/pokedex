@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import UserContext from '../../../data/contexts/User';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { IDescriptionPokemon, IDescriptionPokemonCaptured, IObject } from '../../../data/protocols/models/IUsePokemons';
 
 //Imagens
@@ -50,6 +50,7 @@ import { Container, styles } from '../../../utils/global';
 import ModalInput from './ModalInput';
 import { useState } from 'react';
 import { ListRenderItem } from 'react-native';
+import { useEffect } from 'react';
 
 
 export type RootStackParamList = {
@@ -62,7 +63,8 @@ export type RootStackParamList = {
 const Observations: React.FC = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'Params'>>();
   const { descriptions } = route.params;
-  const { user, favoritePokemon } = useContext(UserContext);
+  const { goBack } = useNavigation();
+  const { user, favoritePokemon, saveComments } = useContext(UserContext);
   const [habitat, setHabitat] = useState<string>("");
   const [localization, setLocalization] = useState<string>("");
   const [food, setFood] = useState<string>("");
@@ -70,6 +72,10 @@ const Observations: React.FC = () => {
   const [visibleModal, setVisibleModal] = useState<boolean>(false);
   const [placeholder, setPlaceholder] = useState<string>("");
   const [type, setType] = useState<string>("");
+
+  useEffect(() => {
+    setLocalization(descriptions.comments.place.toString());
+  }, [descriptions])
 
 
   const validateCaptured = () => {
@@ -84,7 +90,7 @@ const Observations: React.FC = () => {
     return (
       <ContainerSubHeader>
         <ContainerArrow>
-          <Btn onPress={() => { }}>
+          <Btn onPress={() => { goBack() }}>
             <BackArrow width={resp(35)} height={resp(35)} />
             <LabelBtn>
               Voltar
@@ -113,7 +119,6 @@ const Observations: React.FC = () => {
   }
 
   const renderItems = (item: IObject) => {
-    console.log(item)
     return (
       <ContainerList>
         <LabelList>
@@ -127,9 +132,6 @@ const Observations: React.FC = () => {
   }
 
   const saveInput = (type: string) => {
-    console.log("H" + habitat);
-    console.log("F" + food);
-    console.log("C" + curiosities);
     if (type === "Observações") {
       return saveObservations();
     } else if (type === "Alimentação") {
@@ -146,6 +148,7 @@ const Observations: React.FC = () => {
       id: (Math.random() * (9999 - 1) + 1),
       value: curiosities
     });
+    setCuriosities("");
     setVisibleModal(false);
   }
 
@@ -154,6 +157,7 @@ const Observations: React.FC = () => {
       id: (Math.random() * (9999 - 1) + 1),
       value: food
     });
+    setFood("");
     setVisibleModal(false);
   }
 
@@ -162,7 +166,13 @@ const Observations: React.FC = () => {
       id: (Math.random() * (9999 - 1) + 1),
       value: habitat
     });
+    setHabitat("");
     setVisibleModal(false);
+  }
+
+  const save = () => {
+    descriptions.comments.place = localization;
+    saveComments(descriptions)
   }
 
   return (
@@ -269,7 +279,12 @@ const Observations: React.FC = () => {
             })
           }
 
-          <ButtonSave style={styles.shadow}>
+          <ButtonSave
+            style={styles.shadow}
+            onPress={() => {
+              save()
+            }}
+          >
             <ButtonSaveLabel>
               SALVAR ALTERAÇÕES
             </ButtonSaveLabel>

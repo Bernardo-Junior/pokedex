@@ -1,4 +1,4 @@
-import { IDescriptionPokemon, IDescriptionPokemonCaptured } from "./models/IUsePokemons";
+import { IComments, IDescriptionPokemon, IDescriptionPokemonCaptured } from "./models/IUsePokemons";
 
 export interface IUser {
   name: String;
@@ -16,4 +16,5 @@ export interface IUserContext {
   spotPokemon(item: IDescriptionPokemon): void;
   capturePokemon(item: IDescriptionPokemon): void;
   favoritePokemon(item: IDescriptionPokemon): void;
+  saveComments(item: IDescriptionPokemonCaptured): void;
 }

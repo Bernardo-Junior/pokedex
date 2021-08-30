@@ -45,7 +45,10 @@ const ModalInput: React.FC<IModalInput> = ({ label, setValue, value, setVisible,
 
             <ContainerButtons>
               <ButtonCancel 
-                onPress={() => { setVisible(false) }}
+                onPress={() => { 
+                  setValue("");
+                  setVisible(false)
+                 }}
               >
                 <LabelButtons>
                   CANCELAR

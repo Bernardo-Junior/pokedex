@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Alert } from "react-native";
 import SplashScreen from "react-native-splash-screen";
-import { IDescriptionPokemon, IDescriptionPokemonCaptured } from "../protocols/models/IUsePokemons";
+import { IComments, IDescriptionPokemon, IDescriptionPokemonCaptured } from "../protocols/models/IUsePokemons";
 import { IUser, IUserContext } from "../protocols/User";
 
 const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -28,7 +28,6 @@ export const UserProvider: React.FC = ({ children }) => {
     const resultUser = await AsyncStorage.getItem('@user');
 
     if (resultUser !== null) {
-      console.log(JSON.parse(resultUser))
       setUser(JSON.parse(resultUser));
     }
     setVerified(true);
@@ -142,7 +141,7 @@ export const UserProvider: React.FC = ({ children }) => {
       const users: IUser[] = JSON.parse(resultUsers);
       const resultIndex = users.findIndex(user => user?.email?.includes(user?.email?.toString()));
 
-      
+
       if (resultIndex >= 0 && user?.sighted !== undefined) {
         let userUpdate = {
           ...user,
@@ -190,11 +189,11 @@ export const UserProvider: React.FC = ({ children }) => {
       const users: IUser[] = JSON.parse(resultUsers);
       const resultIndex = users.findIndex(user => user?.email?.includes(user?.email?.toString()));
 
-      
+
       if (resultIndex >= 0 && user?.captured !== undefined) {
         let userUpdate: IUser = {
           ...user,
-          captured: [...user?.captured, newData ],
+          captured: [...user?.captured, newData],
         }
 
         users[resultIndex] = userUpdate;
@@ -204,7 +203,7 @@ export const UserProvider: React.FC = ({ children }) => {
             await AsyncStorage.setItem('@users', JSON.stringify(users)),
             await AsyncStorage.setItem('@user', JSON.stringify(userUpdate))
           ]);
-          
+
           setUser(
             {
               ...user,
@@ -229,7 +228,7 @@ export const UserProvider: React.FC = ({ children }) => {
       const users: IUser[] = JSON.parse(resultUsers);
       const resultIndex = users.findIndex(user => user?.email?.includes(user?.email?.toString()));
 
-      
+
       if (resultIndex >= 0 && user?.favorites !== undefined) {
         let userUpdate: IUser = {
           ...user,
@@ -243,7 +242,7 @@ export const UserProvider: React.FC = ({ children }) => {
             await AsyncStorage.setItem('@users', JSON.stringify(users)),
             await AsyncStorage.setItem('@user', JSON.stringify(userUpdate))
           ]);
-          
+
           setUser(
             {
               ...user,
@@ -259,9 +258,51 @@ export const UserProvider: React.FC = ({ children }) => {
     }
   }
 
+  const saveComments = async (item: IDescriptionPokemonCaptured) => {
+    const resultUsers = await AsyncStorage.getItem('@users');
+
+    if (resultUsers !== null) {
+      const users: IUser[] = JSON.parse(resultUsers);
+      const resultIndex = users?.findIndex(user => user?.email == user?.email?.toString());
+
+
+      if (resultIndex >= 0 && user?.captured !== undefined) {
+        const findIndexCaptured = user.captured.findIndex(c => c.name === item.name);
+
+        if (findIndexCaptured >= 0) {
+          user.captured[findIndexCaptured] = item;
+          const findIndexUser = users.findIndex(c => c.email === user.email);
+
+          if (findIndexUser >= 0) {
+            users[findIndexUser] = user;
+
+            try {
+              Promise.all([
+                await AsyncStorage.setItem('@users', JSON.stringify(users)),
+                await AsyncStorage.setItem('@user', JSON.stringify(user))
+              ]);
+              Alert.alert('EBA!', 'As observações foram salvas.');
+            } catch (err) {
+              console.log(err)
+              Alert.alert('OPS!', 'Ocorreu um erro ao salvar as observações, por favor, tente novamente.');
+            }
+          } else {
+            Alert.alert('OPS!', 'Ocorreu um erro ao salvar as observações, por favor, tente novamente.');
+          }
+        } else {
+          Alert.alert('OPS!', 'Ocorreu um erro ao salvar as observações, por favor, tente novamente.');
+        }
+      } else {
+        Alert.alert('OPS!', 'Ocorreu um erro ao salvar as observações, por favor, tente novamente.');
+      }
+    } else {
+      Alert.alert('OPS!', 'Ocorreu um erro ao salvar as observações, por favor, tente novamente.');
+    }
+  }
+
 
   return (
-    <UserContext.Provider value={{ user, signin, validateFields, spotPokemon, capturePokemon, favoritePokemon }}>
+    <UserContext.Provider value={{ user, signin, validateFields, spotPokemon, capturePokemon, favoritePokemon, saveComments }}>
       {children}
     </UserContext.Provider>
   )
