@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CommonActions, DrawerActions, useNavigation } from '@react-navigation/native';
 
 //Icones
@@ -30,9 +30,11 @@ import {
 } from './styles';
 
 import resp from '../../../utils/responsivity';
+import UserContext from '../../../data/contexts/User';
 
 const SideBar: React.FC<object> = ({ }) => {
   const { navigate, goBack, dispatch } = useNavigation();
+  const { logOff } = useContext(UserContext);
 
   return (
     <>
@@ -167,7 +169,7 @@ const SideBar: React.FC<object> = ({ }) => {
             <Hr />
           </ViewOptions>
 
-          <ViewOptionBack>
+          <ViewOptionBack onPress={() => { logOff() }}>
             <BtnOption>
               <IconsFeather name="log-out" size={30} />
               <TxtOption>SAIR</TxtOption>

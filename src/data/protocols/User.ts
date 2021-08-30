@@ -17,4 +17,5 @@ export interface IUserContext {
   capturePokemon(item: IDescriptionPokemon): void;
   favoritePokemon(item: IDescriptionPokemon): void;
   saveComments(item: IDescriptionPokemonCaptured): void;
+  logOff(): void;
 }

@@ -45,7 +45,7 @@ import {
   ContainerMap
 } from './styles';
 
-import { FlatList, ScrollView } from 'react-native';
+import { FlatList, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { Container, styles } from '../../../utils/global';
 import ModalInput from './ModalInput';
 import { useState } from 'react';
@@ -321,28 +321,21 @@ const Observations: React.FC = () => {
 
   return (
     <>
+    <Container style={{ backgroundColor: "#FFFFFF" }}>
       <Header name="Observações Adicionais" />
-      <Container style={{ backgroundColor: "#FFFFFF" }}>
-        <ModalInput
-          label={placeholder}
-          value={type === "Observações" ? habitat : type === "Alimentação" ? food : curiosities}
-          setValue={type === "Observações" ? setHabitat : type === "Alimentação" ? setFood : setCuriosities}
-          setVisible={setVisibleModal}
-          visible={visibleModal}
-          saveInput={saveInput}
-        />
-
-        <ModalOptions
-          item={itemOptions}
-          name=""
-          setVisible={setVisibleOptions}
-          visible={visibleOptions}
-          type={typeOptions}
-          editInput={editInput}
-          removeInput={removeInput}
-          count={count}
-        />
-        <ScrollView>
+      
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        keyboardVerticalOffset={resp(50)}
+        style={{ flex: 1 }}
+      >
+        
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+        >
 
           {subHeader()}
 
@@ -444,6 +437,26 @@ const Observations: React.FC = () => {
             </ButtonSaveLabel>
           </ButtonSave>
         </ScrollView>
+        <ModalInput
+          label={placeholder}
+          value={type === "Observações" ? habitat : type === "Alimentação" ? food : curiosities}
+          setValue={type === "Observações" ? setHabitat : type === "Alimentação" ? setFood : setCuriosities}
+          setVisible={setVisibleModal}
+          visible={visibleModal}
+          saveInput={saveInput}
+        />
+
+        <ModalOptions
+          item={itemOptions}
+          name=""
+          setVisible={setVisibleOptions}
+          visible={visibleOptions}
+          type={typeOptions}
+          editInput={editInput}
+          removeInput={removeInput}
+          count={count}
+        />
+        </KeyboardAvoidingView>
       </Container>
     </>
   )

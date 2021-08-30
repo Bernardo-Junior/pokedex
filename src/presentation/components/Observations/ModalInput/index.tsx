@@ -1,10 +1,10 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { IModalInput } from '../../../../data/protocols/ModalInput';
 import { styles } from '../../../../utils/global';
-
+import resp from '../../../../utils/responsivity';
 import {
   Container,
   ContainerButtons,
@@ -15,14 +15,14 @@ import {
   LabelButtons
 } from './styles';
 
-const ModalInput: React.FC<IModalInput> = ({ label, setValue, value, setVisible, visible=false, saveInput }) => {
+const ModalInput: React.FC<IModalInput> = ({ label, setValue, value, setVisible, visible = false, saveInput }) => {
 
   const verifyType = () => {
-    if(label === "Digite a observação") {
+    if (label === "Digite a observação") {
       return "Observações"
-    } else if(label === "Digite a forma") {
+    } else if (label === "Digite a forma") {
       return "Alimentação"
-    } else if(label === "Digite a curiosidade") {
+    } else if (label === "Digite a curiosidade") {
       return "Curiosidade"
     } else {
       return "";
@@ -33,36 +33,49 @@ const ModalInput: React.FC<IModalInput> = ({ label, setValue, value, setVisible,
       {
         visible && (
           <Container>
-            <ContainerInput>
-              <Input
-                placeholderTextColor="#FFFFFF"
-                placeholder={`${label ? label : ""}`}
-                value={value}
-                onChangeText={value => setValue(value)}
-              />
-            </ContainerInput>
-
-            <ContainerButtons>
-              <ButtonCancel 
-                onPress={() => { 
-                  setValue("");
-                  setVisible(false)
-                 }}
+            <KeyboardAvoidingView
+              behavior={Platform.OS === "ios" ? "padding" : undefined}
+              keyboardVerticalOffset={resp(50)}
+              style={{ flex: 1 }}
+            >
+              <ScrollView
+                contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
+                keyboardShouldPersistTaps="handled"
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
               >
-                <LabelButtons>
-                  CANCELAR
-                </LabelButtons>
-              </ButtonCancel>
+                <ContainerInput>
+                  <Input
+                    placeholderTextColor="#FFFFFF"
+                    placeholder={`${label ? label : ""}`}
+                    value={value}
+                    onChangeText={value => setValue(value)}
+                  />
+                </ContainerInput>
 
-              <ButtonSave 
-                style={styles.shadow}
-                onPress={() => { saveInput(verifyType()) }}
-              >
-                <LabelButtons >
-                  SALVAR
-                </LabelButtons>
-              </ButtonSave>
-            </ContainerButtons>
+                <ContainerButtons>
+                  <ButtonCancel
+                    onPress={() => {
+                      setValue("");
+                      setVisible(false)
+                    }}
+                  >
+                    <LabelButtons>
+                      CANCELAR
+                    </LabelButtons>
+                  </ButtonCancel>
+
+                  <ButtonSave
+                    style={styles.shadow}
+                    onPress={() => { saveInput(verifyType()) }}
+                  >
+                    <LabelButtons >
+                      SALVAR
+                    </LabelButtons>
+                  </ButtonSave>
+                </ContainerButtons>
+              </ScrollView>
+            </KeyboardAvoidingView>
           </Container>
         )
       }

@@ -8,9 +8,7 @@ export const Container = styled.SafeAreaView`
   background-color: ${ColorPrimary};
   width: 100%;
   min-height: ${resp(250)}px;
-  position: absolute;
   bottom: 0;
-  z-index: 10;
   justify-content: center;
   align-items: center;
 `;

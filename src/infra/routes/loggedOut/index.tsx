@@ -3,8 +3,8 @@ import React from 'react';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 
 //Stack para usuário não logado
-import Login from '../../../presentation/pages/login';
-import Register from '../../../presentation/pages/register';
+import Login from '../../../presentation/pages/Login';
+import Register from '../../../presentation/pages/Register';
 
 const Stack = createStackNavigator();
 

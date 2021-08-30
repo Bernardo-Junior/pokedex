@@ -30,7 +30,7 @@ import { Container, ContainerInput, Input, styles } from '../../../utils/global'
 import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 
 
-const login: React.FC = () => {
+const Login: React.FC = () => {
   const [press, setPress] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("bernardo@gmail.com");
   const [password, setPassword] = useState<string>("123456");
@@ -131,4 +131,4 @@ const login: React.FC = () => {
   )
 }
 
-export default login;
+export default Login;

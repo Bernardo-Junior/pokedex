@@ -301,9 +301,14 @@ export const UserProvider: React.FC = ({ children }) => {
     }
   }
 
+  const logOff = async () => {
+    await AsyncStorage.removeItem('@user');
+
+    setUser(null);
+  }
 
   return (
-    <UserContext.Provider value={{ user, signin, validateFields, spotPokemon, capturePokemon, favoritePokemon, saveComments }}>
+    <UserContext.Provider value={{ user, signin, validateFields, spotPokemon, capturePokemon, favoritePokemon, saveComments, logOff }}>
       {children}
     </UserContext.Provider>
   )
