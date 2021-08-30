@@ -138,16 +138,17 @@ const Observations: React.FC = () => {
 
   //Funções para remover dados da lista
   const removeInput = (type: string, item: IObject) => {
-    console.log(type);
+    var result = false;
     if (type === "Observações") {
-      return removeObservations(item);
+      result =  removeObservations(item);
     } else if (type === "Alimentação") {
-      return removeFoods(item);
+      result =  removeFoods(item);
     } else if (type === "Curiosidades") {
-      return removeCuriosities(item);
+      result =  removeCuriosities(item);
     } else {
-      return;
+      return false;
     }
+    return result;
   }
 
   const removeCuriosities = (item: IObject) => {
@@ -155,8 +156,11 @@ const Observations: React.FC = () => {
 
     if (resultIndex >= 0) {
       descriptions.comments.otherCuriosities.splice(resultIndex, 1);
+      setCount(count => count+1);
+      return true;
+    } else {
+      return false;
     }
-    setCount(count => count+1);
   }
 
   // useEffect(() => {
@@ -168,8 +172,11 @@ const Observations: React.FC = () => {
 
     if (resultIndex >= 0) {
       descriptions.comments.Foods.splice(resultIndex, 1);
+      setCount(count => count+1);
+      return true;
+    } else {
+      return false;
     }
-    setCount(count => count+1);
   }
 
   const removeObservations = (item: IObject) => {
@@ -177,22 +184,27 @@ const Observations: React.FC = () => {
 
     if (resultIndex >= 0) {
       descriptions.comments.habitats.splice(resultIndex, 1);
+      setCount(count => count+1);
+      return true;
+    } else {
+      return false;
     }
-    setCount(count => count+1);
   }
 
   //Funções para editar uma informação da lista
   const editInput = (type: string, item: IObject, value: string) => {
-    console.log(type);
-    if (type === "Observações") {
-      return editObservations(item, value);
-    } else if (type === "Alimentação") {
-      return editFoods(item, value);
-    } else if (type === "Curiosidades") {
-      return editCuriosities(item, value);
+    var result = false;
+    if (type == "Observações") {
+      result = editObservations(item, value);
+    } else if (type == "Alimentação") {
+      result = editFoods(item, value);
+    } else if (type == "Curiosidades") {
+      result = editCuriosities(item, value);
     } else {
-      return;
+      return false;
     }
+
+    return result;
   }
 
   const editCuriosities = (item: IObject, value: string) => {
@@ -200,9 +212,12 @@ const Observations: React.FC = () => {
 
     if (resultIndex >= 0) {
       descriptions.comments.otherCuriosities[resultIndex].value = value;
+      setCount(count => count+1);
+      return true;
+    } else {
+      return false;
     }
-    setVisibleOptions(false);
-    setCount(count => count+1);
+    
   }
 
   const editFoods = (item: IObject, value: string) => {
@@ -210,9 +225,11 @@ const Observations: React.FC = () => {
 
     if (resultIndex >= 0) {
       descriptions.comments.Foods[resultIndex].value = value;
+      setCount(count => count+1);
+      return true;
+    } else {
+      return false;
     }
-    setVisibleOptions(false);
-    setCount(count => count+1);
   }
 
   const editObservations = (item: IObject, value: string) => {
@@ -220,9 +237,11 @@ const Observations: React.FC = () => {
 
     if (resultIndex >= 0) {
       descriptions.comments.habitats[resultIndex].value = value;
+      setCount(count => count+1);
+      return true;
+    } else {
+      return false;
     }
-    setVisibleOptions(false);
-    setCount(count => count+1);
   }
 
   //Funções para salvar informações na lista

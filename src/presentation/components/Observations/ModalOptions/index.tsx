@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { IModalInput } from '../../../../data/protocols/ModalInput';
 import { IModalOptions } from '../../../../data/protocols/ModalOptions';
 import { styles } from '../../../../utils/global';
@@ -30,6 +30,29 @@ const ModalOptions: React.FC<IModalOptions> = ({removeInput ,editInput, name, it
   useEffect(() => {
     setValue(item.value);
   }, [visible])
+
+  const sendEdit = () => {
+    
+   const result = editInput(type, item, value);
+
+   if(result) {
+    setIsEdit(false);
+    setVisible(false);
+   } else {
+     Alert.alert("OPS!", "Ocorreu um erro ao editar, por favor, tente novamente");
+   }
+  }
+
+  const sendRemove= () => {                   
+    const result = removeInput(type, item);
+ 
+    if(result) {
+     setIsEdit(false);
+     setVisible(false);
+    } else {
+      Alert.alert("OPS!", "Ocorreu um erro ao remover, por favor, tente novamente");
+    }
+   }
 
 
   return (
@@ -64,8 +87,7 @@ const ModalOptions: React.FC<IModalOptions> = ({removeInput ,editInput, name, it
                     <ButtonSave
                       style={styles.shadow}
                       onPress={() => {
-                        setIsEdit(false);
-                        editInput(type, item, value);
+                        sendEdit();
                       }}
                     >
                       <LabelButtons >
@@ -84,8 +106,7 @@ const ModalOptions: React.FC<IModalOptions> = ({removeInput ,editInput, name, it
                   </ContainerIcons>
                   <ContainerIcons 
                     onPress={() => {
-                      setVisible(false);
-                      removeInput(type, item);
+                      sendRemove()
                     }}
                   >
                     <Trash width={resp(30)} height={resp(25)} />

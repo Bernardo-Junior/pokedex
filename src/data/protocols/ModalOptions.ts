@@ -7,6 +7,6 @@ export interface IModalOptions {
   visible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
   type: string;
-  editInput(type: string, item: IObject, value: string): void;
-  removeInput(type: string, item: IObject): void;
+  editInput(type: string, item: IObject, value: string): boolean;
+  removeInput(type: string, item: IObject): boolean;
 }
