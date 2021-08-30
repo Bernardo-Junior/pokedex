@@ -26,7 +26,6 @@ import {
 const ModalOptions: React.FC<IModalOptions> = ({removeInput ,editInput, name, item, visible, setVisible, type }) => {
   const [value, setValue] = useState<string>("");
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [isTrash, setIsTrash] = useState<boolean>(false);
 
   useEffect(() => {
     setValue(item.value);

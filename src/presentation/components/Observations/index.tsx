@@ -135,6 +135,7 @@ const Observations: React.FC = () => {
     )
   }
 
+  //Funções para remover dados da lista
   const removeInput = (type: string, item: IObject) => {
     if (type === "Observações") {
       return removeObservations(item);
@@ -150,7 +151,7 @@ const Observations: React.FC = () => {
   const removeCuriosities = (item: IObject) => {
     const resultIndex = descriptions.comments.otherCuriosities.findIndex(habitat => habitat.id === item.id);
 
-    if(resultIndex >= 0) {
+    if (resultIndex >= 0) {
       descriptions.comments.habitats.splice(resultIndex, 1);
     }
     setVisibleOptions(false);
@@ -159,7 +160,7 @@ const Observations: React.FC = () => {
   const removeFoods = (item: IObject) => {
     const resultIndex = descriptions.comments.Foods.findIndex(habitat => habitat.id === item.id);
 
-    if(resultIndex >= 0) {
+    if (resultIndex >= 0) {
       descriptions.comments.Foods.splice(resultIndex, 1);
     }
     setVisibleOptions(false);
@@ -168,12 +169,13 @@ const Observations: React.FC = () => {
   const removeObservations = (item: IObject) => {
     const resultIndex = descriptions.comments.habitats.findIndex(habitat => habitat.id === item.id);
 
-    if(resultIndex >= 0) {
+    if (resultIndex >= 0) {
       descriptions.comments.habitats.splice(resultIndex, 1);
     }
     setVisibleOptions(false);
   }
 
+  //Funções para editar uma informação da lista
   const editInput = (type: string, item: IObject, value: string) => {
     if (type === "Observações") {
       return editObservations(item, value);
@@ -189,7 +191,7 @@ const Observations: React.FC = () => {
   const editCuriosities = (item: IObject, value: string) => {
     const resultIndex = descriptions.comments.otherCuriosities.findIndex(habitat => habitat.id === item.id);
 
-    if(resultIndex >= 0) {
+    if (resultIndex >= 0) {
       descriptions.comments.otherCuriosities[resultIndex] = {
         id: (Math.random() * (9999 - 1) + 1),
         value: value
@@ -201,7 +203,7 @@ const Observations: React.FC = () => {
   const editFoods = (item: IObject, value: string) => {
     const resultIndex = descriptions.comments.Foods.findIndex(habitat => habitat.id === item.id);
 
-    if(resultIndex >= 0) {
+    if (resultIndex >= 0) {
       descriptions.comments.Foods[resultIndex] = {
         id: (Math.random() * (9999 - 1) + 1),
         value: value
@@ -213,7 +215,7 @@ const Observations: React.FC = () => {
   const editObservations = (item: IObject, value: string) => {
     const resultIndex = descriptions.comments.habitats.findIndex(habitat => habitat.id === item.id);
 
-    if(resultIndex >= 0) {
+    if (resultIndex >= 0) {
       descriptions.comments.habitats[resultIndex] = {
         id: (Math.random() * (9999 - 1) + 1),
         value: value
@@ -222,6 +224,7 @@ const Observations: React.FC = () => {
     setVisibleOptions(false);
   }
 
+  //Funções para salvar informações na lista
   const saveInput = (type: string) => {
     if (type === "Observações") {
       return saveObservations();
@@ -266,9 +269,9 @@ const Observations: React.FC = () => {
     saveComments(descriptions)
   }
 
+
   return (
     <>
-
       <Header name="Observações Adicionais" />
       <Container style={{ backgroundColor: "#FFFFFF" }}>
         <ModalInput
@@ -280,7 +283,7 @@ const Observations: React.FC = () => {
           saveInput={saveInput}
         />
 
-        <ModalOptions 
+        <ModalOptions
           item={itemOptions}
           name=""
           setVisible={setVisibleOptions}

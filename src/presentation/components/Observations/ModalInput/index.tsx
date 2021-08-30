@@ -16,7 +16,6 @@ import {
 } from './styles';
 
 const ModalInput: React.FC<IModalInput> = ({ label, setValue, value, setVisible, visible=false, saveInput }) => {
-  const [type, setType] = useState<string>("none");
 
   const verifyType = () => {
     if(label === "Digite a observação") {
