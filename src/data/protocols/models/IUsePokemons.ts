@@ -66,10 +66,15 @@ export interface IDescriptionPokemon {
 }
 
 export interface IComments {
-  habitats: Array<String>;
+  habitats: Array<IObject>;
   place: String;
-  Foods: Array<String>;
-  otherCuriosities: Array<String>;
+  Foods: Array<IObject>;
+  otherCuriosities: Array<IObject>;
+}
+
+export interface IObject {
+  id: number;
+  value: string;
 }
 
 export interface IDescriptionPokemonCaptured {
@@ -80,7 +85,7 @@ export interface IDescriptionPokemonCaptured {
   sprites: Sprites;
   species: ISpecies;
   weight: number;
-  comments: IComments | [];
+  comments: IComments;
 }
 
 

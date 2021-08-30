@@ -72,9 +72,9 @@ const PokemonListing: React.FC = () => {
         style={styles.shadow}
         onPress={() => { navigate('PokemonDetails', { item, title: titleHeader }) }}
       >
-        <ImageList source={{ uri: item.sprites.other['official-artwork'].front_default }} />
+        <ImageList source={{ uri: item?.sprites?.other['official-artwork']?.front_default }} />
         <LabelList>
-          {item.name}
+          {item?.name}
         </LabelList>
       </ContainerList>
     )

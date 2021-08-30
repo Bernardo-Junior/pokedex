@@ -1,4 +1,6 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { View } from 'react-native';
 import { IModalInput } from '../../../../data/protocols/ModalInput';
 import { styles } from '../../../../utils/global';
@@ -13,7 +15,20 @@ import {
   LabelButtons
 } from './styles';
 
-const ModalInput: React.FC<IModalInput> = ({ label, setValue, value, setVisible, visible=false }) => {
+const ModalInput: React.FC<IModalInput> = ({ label, setValue, value, setVisible, visible=false, saveInput }) => {
+  const [type, setType] = useState<string>("none");
+
+  const verifyType = () => {
+    if(label === "Digite a observação") {
+      return "Observações"
+    } else if(label === "Digite a forma") {
+      return "Alimentação"
+    } else if(label === "Digite a curiosidade") {
+      return "Curiosidade"
+    } else {
+      return "";
+    }
+  }
   return (
     <>
       {
@@ -30,7 +45,6 @@ const ModalInput: React.FC<IModalInput> = ({ label, setValue, value, setVisible,
 
             <ContainerButtons>
               <ButtonCancel 
-                style={styles.shadow}
                 onPress={() => { setVisible(false) }}
               >
                 <LabelButtons>
@@ -38,7 +52,10 @@ const ModalInput: React.FC<IModalInput> = ({ label, setValue, value, setVisible,
                 </LabelButtons>
               </ButtonCancel>
 
-              <ButtonSave style={styles.shadow}>
+              <ButtonSave 
+                style={styles.shadow}
+                onPress={() => { saveInput(verifyType()) }}
+              >
                 <LabelButtons >
                   SALVAR
                 </LabelButtons>

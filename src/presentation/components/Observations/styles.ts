@@ -101,6 +101,7 @@ export const ButtonSave = styled.TouchableOpacity`
   border-radius: ${resp(7)}px;
   justify-content: center;
   align-items: center;
+  margin-bottom: ${resp(40)}px;
 `;
 
 export const ButtonSaveLabel = styled.Text`
@@ -113,7 +114,7 @@ export const ContainerInput = styled.View`
   height: ${resp(50)}px;
   border: solid 1px #000000;
   border-radius: ${resp(10)}px;
-  margin-left: ${resp(25)}px;
+  align-self: center;
   justify-content: center;
   align-items: center;
   margin-top: ${resp(10)}px;
@@ -129,8 +130,8 @@ export const Input = styled(TextInput)`
 export const ContainerList = styled.TouchableOpacity`
   width: 84%;
   min-height: ${resp(45)}px;
+  align-self: center;
   border: solid 1px #000000;
-  margin-left: ${resp(25)}px;
   margin-top: ${resp(10)}px;
   border-radius: ${resp(10)}px;
   flex-direction: row;
@@ -143,6 +144,8 @@ export const LabelList = styled.Text`
   font-family: "OpenSans-Regular";
   margin-left: ${resp(10)}px;
   width: ${resp(280)}px;
+  margin-top: ${resp(5)}px;
+  margin-bottom: ${resp(5)}px;
 `;
 
 
@@ -157,3 +160,5 @@ export const LabelOption = styled.Text`
   font-family: "OpenSans-Regular"; 
   flex-direction: row;
 `;
+
+export const ContainerMap = styled.View``;

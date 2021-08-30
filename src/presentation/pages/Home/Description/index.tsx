@@ -91,7 +91,7 @@ const DescriptionAllPokemons: React.FC = () => {
   }, [])
 
   const validateSighted = () => {
-    const resultFind = user?.sighted.find(pokemon => pokemon.name.includes(descriptions.name));
+    const resultFind = user?.sighted?.find(pokemon => pokemon?.name?.includes(descriptions?.name));
     if (resultFind) {
       return true
     }
@@ -99,7 +99,7 @@ const DescriptionAllPokemons: React.FC = () => {
   }
 
   const validateCaptured = () => {
-    const resultFind = user?.captured.find(pokemon => pokemon.name.includes(descriptions.name));
+    const resultFind = user?.captured?.find(pokemon => pokemon?.name?.includes(descriptions?.name));
     if (resultFind) {
       return true
     }

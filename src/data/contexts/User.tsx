@@ -178,7 +178,12 @@ export const UserProvider: React.FC = ({ children }) => {
 
     let newData: IDescriptionPokemonCaptured = {
       ...item,
-      comments: []
+      comments: {
+        Foods: [],
+        habitats: [],
+        otherCuriosities: [],
+        place: ""
+      }
     }
 
     if (resultUsers !== null) {
