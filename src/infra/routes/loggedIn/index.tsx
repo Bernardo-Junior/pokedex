@@ -8,6 +8,7 @@ import Home from '../../../presentation/pages/Home';
 import DescriptionAllPokemons from '../../../presentation/pages/Home/Description';
 import PokemonListing from '../../../presentation/components/PokemonListing';
 import PokemonDetails from '../../../presentation/components/PokemonDetails';
+import Observations from '../../../presentation/components/Observations';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -28,6 +29,7 @@ const DrawerNavigator: React.FC = () => {
       <Drawer.Screen name="DescriptionAllPokemons" component={DescriptionAllPokemons} />
       <Drawer.Screen name="PokemonListing" component={PokemonListing} />
       <Drawer.Screen name="PokemonDetails" component={PokemonDetails} />
+      <Drawer.Screen name="Observations" component={Observations} />
     </Drawer.Navigator>
   )
 };

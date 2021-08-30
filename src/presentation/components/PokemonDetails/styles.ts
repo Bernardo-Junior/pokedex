@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { ColorPrimary } from "../../../utils/global";
 
 import resp from '../../../utils/responsivity';
 
@@ -95,4 +96,21 @@ export const Btn = styled.TouchableOpacity`
 
 export const LabelBtn = styled.Text`
   font-family: "OpenSans-Bold";
+`;
+
+export const BtnObservations = styled.TouchableOpacity`
+  align-self: center;
+  width: 70%;
+  height: ${resp(50)}px;
+  background-color: ${ColorPrimary};
+  border-radius: ${resp(7)}px;
+  margin-top: ${resp(10)}px;
+  margin-bottom: ${resp(10)}px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const BtnObservationsLabel = styled.Text`
+  font-family: "OpenSans-ExtraBold";
+  color: #FFFFFF;
 `;

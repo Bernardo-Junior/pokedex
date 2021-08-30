@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Alert } from "react-native";
 import SplashScreen from "react-native-splash-screen";
-import { IDescriptionPokemon } from "../protocols/models/IUsePokemons";
+import { IDescriptionPokemon, IDescriptionPokemonCaptured } from "../protocols/models/IUsePokemons";
 import { IUser, IUserContext } from "../protocols/User";
 
 const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -28,6 +28,7 @@ export const UserProvider: React.FC = ({ children }) => {
     const resultUser = await AsyncStorage.getItem('@user');
 
     if (resultUser !== null) {
+      console.log(JSON.parse(resultUser))
       setUser(JSON.parse(resultUser));
     }
     setVerified(true);
@@ -175,6 +176,11 @@ export const UserProvider: React.FC = ({ children }) => {
   const capturePokemon = async (item: IDescriptionPokemon) => {
     const resultUsers = await AsyncStorage.getItem('@users');
 
+    let newData: IDescriptionPokemonCaptured = {
+      ...item,
+      comments: []
+    }
+
     if (resultUsers !== null) {
       const users: IUser[] = JSON.parse(resultUsers);
       const resultIndex = users.findIndex(user => user?.email?.includes(user?.email?.toString()));
@@ -183,7 +189,7 @@ export const UserProvider: React.FC = ({ children }) => {
       if (resultIndex >= 0 && user?.captured !== undefined) {
         let userUpdate: IUser = {
           ...user,
-          captured: [...user?.captured, item]
+          captured: [...user?.captured, newData ],
         }
 
         users[resultIndex] = userUpdate;
@@ -197,7 +203,8 @@ export const UserProvider: React.FC = ({ children }) => {
           setUser(
             {
               ...user,
-              captured: [...user?.captured, item]
+              captured: [...user?.captured, newData],
+
             }
           )
           return Alert.alert('EBA!', 'O pokemon foi capturado!');

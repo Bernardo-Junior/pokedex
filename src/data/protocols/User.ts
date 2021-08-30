@@ -1,11 +1,11 @@
-import { IDescriptionPokemon } from "./models/IUsePokemons";
+import { IDescriptionPokemon, IDescriptionPokemonCaptured } from "./models/IUsePokemons";
 
 export interface IUser {
   name: String;
   email: String;
   password: String;
   favorites: Array<IDescriptionPokemon> | [];
-  captured: Array<IDescriptionPokemon> | [];
+  captured: Array<IDescriptionPokemonCaptured> | [];
   sighted: Array<IDescriptionPokemon> | [];
 }
 

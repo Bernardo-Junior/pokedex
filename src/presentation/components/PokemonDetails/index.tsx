@@ -20,9 +20,11 @@ import {
   ImageLabelHeight,
   Btn,
   ContainerArrow,
-  LabelBtn
+  LabelBtn,
+  BtnObservations,
+  BtnObservationsLabel
 } from './styles';
-import { Container, errorFunction } from '../../../utils/global';
+import { Container, errorFunction, styles } from '../../../utils/global';
 
 //Icones
 import HeartLight from '../../../assets/icons/heartLight.svg';
@@ -53,7 +55,7 @@ export type RootStackParamList = {
 
 const PokemonDetails: React.FC = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'Params'>>();
-  const { goBack } = useNavigation();
+  const { goBack, navigate } = useNavigation();
   const [descriptions, setDescriptions] = useState<IDescriptionPokemon>({} as IDescriptionPokemon);
   const [abilities, setAbilities] = useState<IAbilities[]>([]);
   const { user, favoritePokemon } = useContext(UserContext);
@@ -131,9 +133,20 @@ const PokemonDetails: React.FC = () => {
         <ContainerImagePokemon
           source={{ uri: descriptions?.sprites?.other?.['official-artwork'].front_default }}
           resizeMode="contain"
-        >
+        />
 
-        </ContainerImagePokemon>
+        {
+          title === "Capturados" && (
+            <BtnObservations
+              onPress={() => { navigate('Observations', { descriptions }) }}
+              style={styles.shadow}
+            >
+              <BtnObservationsLabel>
+                OBSERVAÇÕES
+              </BtnObservationsLabel>
+            </BtnObservations>
+          )
+        }
 
         <ImageLabel
           style={{ marginTop: resp(10) }}

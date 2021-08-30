@@ -65,4 +65,22 @@ export interface IDescriptionPokemon {
   weight: number;
 }
 
+export interface IComments {
+  habitats: Array<String>;
+  place: String;
+  Foods: Array<String>;
+  otherCuriosities: Array<String>;
+}
+
+export interface IDescriptionPokemonCaptured {
+  abilities: IAbilities[];
+  height: number;
+  id: number;
+  name: string;
+  sprites: Sprites;
+  species: ISpecies;
+  weight: number;
+  comments: IComments | [];
+}
+
 

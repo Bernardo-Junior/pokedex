@@ -59,7 +59,8 @@ const SideBar: React.FC<object> = ({ }) => {
                     { name: 'Home' },
                     { name: 'DescriptionAllPokemons' },
                     { name: 'PokemonListing' },
-                    { name: 'PokemonDetails' }
+                    { name: 'PokemonDetails' },
+                    { name: 'Observations' }
                   ],
                 })
               );
@@ -89,7 +90,8 @@ const SideBar: React.FC<object> = ({ }) => {
                     },
                     { name: 'Home' },
                     { name: 'DescriptionAllPokemons' },
-                    { name: 'PokemonDetails' }
+                    { name: 'PokemonDetails' },
+                    { name: 'Observations' }
                   ],
                 })
               );
@@ -118,7 +120,8 @@ const SideBar: React.FC<object> = ({ }) => {
                     },
                     { name: 'Home' },
                     { name: 'DescriptionAllPokemons' },
-                    { name: 'PokemonDetails' }
+                    { name: 'PokemonDetails' },
+                    { name: 'Observations' }
                   ],
                 })
               );
@@ -147,7 +150,8 @@ const SideBar: React.FC<object> = ({ }) => {
                     },
                     { name: 'Home' },
                     { name: 'DescriptionAllPokemons' },
-                    { name: 'PokemonDetails' }
+                    { name: 'PokemonDetails' },
+                    { name: 'Observations' }
                   ],
                 })
               );
