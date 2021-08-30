@@ -101,7 +101,7 @@ const PokemonListing: React.FC = () => {
   }
 
   const searchPokemon = (name: string) => {
-    const result = pokemonsCopy.filter(pokemon => pokemon.name.includes(name));
+    const result = pokemonsCopy?.filter(pokemon => pokemon?.name?.includes(name));
 
     if (result) {
       setPokemons(result);

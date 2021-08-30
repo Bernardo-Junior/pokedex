@@ -76,6 +76,7 @@ const Observations: React.FC = () => {
   const [type, setType] = useState<string>("");
   const [typeOptions, setTypeOption] = useState<string>("");
   const [itemOptions, setItemOptions] = useState<IObject>({} as IObject);
+  const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
     setLocalization(descriptions.comments.place.toString());
@@ -137,6 +138,7 @@ const Observations: React.FC = () => {
 
   //Funções para remover dados da lista
   const removeInput = (type: string, item: IObject) => {
+    console.log(type);
     if (type === "Observações") {
       return removeObservations(item);
     } else if (type === "Alimentação") {
@@ -152,10 +154,14 @@ const Observations: React.FC = () => {
     const resultIndex = descriptions.comments.otherCuriosities.findIndex(habitat => habitat.id === item.id);
 
     if (resultIndex >= 0) {
-      descriptions.comments.habitats.splice(resultIndex, 1);
+      descriptions.comments.otherCuriosities.splice(resultIndex, 1);
     }
-    setVisibleOptions(false);
+    setCount(count => count+1);
   }
+
+  // useEffect(() => {
+  //   console.log(descriptions.comments)
+  // }, [count]);
 
   const removeFoods = (item: IObject) => {
     const resultIndex = descriptions.comments.Foods.findIndex(habitat => habitat.id === item.id);
@@ -163,7 +169,7 @@ const Observations: React.FC = () => {
     if (resultIndex >= 0) {
       descriptions.comments.Foods.splice(resultIndex, 1);
     }
-    setVisibleOptions(false);
+    setCount(count => count+1);
   }
 
   const removeObservations = (item: IObject) => {
@@ -172,11 +178,12 @@ const Observations: React.FC = () => {
     if (resultIndex >= 0) {
       descriptions.comments.habitats.splice(resultIndex, 1);
     }
-    setVisibleOptions(false);
+    setCount(count => count+1);
   }
 
   //Funções para editar uma informação da lista
   const editInput = (type: string, item: IObject, value: string) => {
+    console.log(type);
     if (type === "Observações") {
       return editObservations(item, value);
     } else if (type === "Alimentação") {
@@ -192,36 +199,27 @@ const Observations: React.FC = () => {
     const resultIndex = descriptions.comments.otherCuriosities.findIndex(habitat => habitat.id === item.id);
 
     if (resultIndex >= 0) {
-      descriptions.comments.otherCuriosities[resultIndex] = {
-        id: (Math.random() * (9999 - 1) + 1),
-        value: value
-      }
+      descriptions.comments.otherCuriosities[resultIndex].value = value;
     }
-    setVisibleOptions(false);
+    setCount(count => count+1);
   }
 
   const editFoods = (item: IObject, value: string) => {
-    const resultIndex = descriptions.comments.Foods.findIndex(habitat => habitat.id === item.id);
+    const resultIndex = descriptions.comments.Foods.findIndex(food => food.id === item.id);
 
     if (resultIndex >= 0) {
-      descriptions.comments.Foods[resultIndex] = {
-        id: (Math.random() * (9999 - 1) + 1),
-        value: value
-      }
+      descriptions.comments.Foods[resultIndex].value = value;
     }
-    setVisibleOptions(false);
+    setCount(count => count+1);
   }
 
   const editObservations = (item: IObject, value: string) => {
-    const resultIndex = descriptions.comments.habitats.findIndex(habitat => habitat.id === item.id);
+    const resultIndex = descriptions.comments.habitats.findIndex(observation => observation.id === item.id);
 
     if (resultIndex >= 0) {
-      descriptions.comments.habitats[resultIndex] = {
-        id: (Math.random() * (9999 - 1) + 1),
-        value: value
-      }
+      descriptions.comments.habitats[resultIndex].value = value;
     }
-    setVisibleOptions(false);
+    setCount(count => count+1);
   }
 
   //Funções para salvar informações na lista
@@ -242,6 +240,7 @@ const Observations: React.FC = () => {
       id: (Math.random() * (9999 - 1) + 1),
       value: curiosities
     });
+    setCount(count => count+1);
     setCuriosities("");
     setVisibleModal(false);
   }
@@ -251,6 +250,7 @@ const Observations: React.FC = () => {
       id: (Math.random() * (9999 - 1) + 1),
       value: food
     });
+    setCount(count => count+1);
     setFood("");
     setVisibleModal(false);
   }
@@ -260,15 +260,15 @@ const Observations: React.FC = () => {
       id: (Math.random() * (9999 - 1) + 1),
       value: habitat
     });
+    setCount(count => count+1);
     setHabitat("");
     setVisibleModal(false);
   }
 
   const save = () => {
     descriptions.comments.place = localization;
-    saveComments(descriptions)
+    saveComments(descriptions);
   }
-
 
   return (
     <>

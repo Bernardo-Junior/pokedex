@@ -44,7 +44,7 @@ export const UserProvider: React.FC = ({ children }) => {
 
     if (resultUsers !== null) {
       const users: IUser[] = JSON.parse(resultUsers);
-      const resultFind = users.find(user => user.email?.includes(email));
+      const resultFind = users?.find(user => user?.email?.includes(email));
 
       if (resultFind) {
         if (resultFind.password === password) {
@@ -95,7 +95,7 @@ export const UserProvider: React.FC = ({ children }) => {
 
     if (resultUsers !== null) {
       const users: IUser[] = JSON.parse(resultUsers);
-      const resultFind = users.find(user => user.email?.includes(email));
+      const resultFind = users?.find(user => user?.email?.includes(email));
 
       if (resultFind) {
         Alert.alert('OPS!', 'Esse email já está em uso, por favor.');
@@ -139,7 +139,7 @@ export const UserProvider: React.FC = ({ children }) => {
 
     if (resultUsers !== null) {
       const users: IUser[] = JSON.parse(resultUsers);
-      const resultIndex = users.findIndex(user => user?.email?.includes(user?.email?.toString()));
+      const resultIndex = users?.findIndex(user => user?.email?.includes(user?.email?.toString()));
 
 
       if (resultIndex >= 0 && user?.sighted !== undefined) {
@@ -187,7 +187,7 @@ export const UserProvider: React.FC = ({ children }) => {
 
     if (resultUsers !== null) {
       const users: IUser[] = JSON.parse(resultUsers);
-      const resultIndex = users.findIndex(user => user?.email?.includes(user?.email?.toString()));
+      const resultIndex = users?.findIndex(user => user?.email?.includes(user?.email?.toString()));
 
 
       if (resultIndex >= 0 && user?.captured !== undefined) {
@@ -226,7 +226,7 @@ export const UserProvider: React.FC = ({ children }) => {
 
     if (resultUsers !== null) {
       const users: IUser[] = JSON.parse(resultUsers);
-      const resultIndex = users.findIndex(user => user?.email?.includes(user?.email?.toString()));
+      const resultIndex = users?.findIndex(user => user?.email?.includes(user?.email?.toString()));
 
 
       if (resultIndex >= 0 && user?.favorites !== undefined) {
@@ -258,6 +258,7 @@ export const UserProvider: React.FC = ({ children }) => {
     }
   }
 
+  //Função para salvar as observações
   const saveComments = async (item: IDescriptionPokemonCaptured) => {
     const resultUsers = await AsyncStorage.getItem('@users');
 
@@ -267,11 +268,11 @@ export const UserProvider: React.FC = ({ children }) => {
 
 
       if (resultIndex >= 0 && user?.captured !== undefined) {
-        const findIndexCaptured = user.captured.findIndex(c => c.name === item.name);
+        const findIndexCaptured = user.captured?.findIndex(c => c?.name === item?.name);
 
         if (findIndexCaptured >= 0) {
           user.captured[findIndexCaptured] = item;
-          const findIndexUser = users.findIndex(c => c.email === user.email);
+          const findIndexUser = users?.findIndex(c => c?.email === user?.email);
 
           if (findIndexUser >= 0) {
             users[findIndexUser] = user;

@@ -64,8 +64,9 @@ const ModalOptions: React.FC<IModalOptions> = ({removeInput ,editInput, name, it
                     <ButtonSave
                       style={styles.shadow}
                       onPress={() => {
-                        editInput(type, item, value);
                         setIsEdit(false);
+                        setVisible(false);
+                        editInput(type, item, value);
                       }}
                     >
                       <LabelButtons >
@@ -84,6 +85,7 @@ const ModalOptions: React.FC<IModalOptions> = ({removeInput ,editInput, name, it
                   </ContainerIcons>
                   <ContainerIcons 
                     onPress={() => {
+                      setVisible(false);
                       removeInput(type, item);
                     }}
                   >
