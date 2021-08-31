@@ -55,8 +55,7 @@ const PokemonDetails: React.FC = () => {
   const { goBack, navigate } = useNavigation();
   const [descriptions, setDescriptions] = useState<IDescriptionPokemon>({} as IDescriptionPokemon);
   const [abilities, setAbilities] = useState<IAbilities[]>([]);
-  const { user, favoritePokemon } = useContext(UserContext);
-
+  const { user, favoritePokemon, disfavorPokemon } = useContext(UserContext);
   const { item, title } = route.params;
 
   useEffect(() => {
@@ -68,6 +67,7 @@ const PokemonDetails: React.FC = () => {
     setAbilities(item.abilities);
   }
 
+
   const renderItemsAbility: ListRenderItem<IAbilities> = useCallback(({ item }) => {
     return (
       <TextList>
@@ -76,20 +76,20 @@ const PokemonDetails: React.FC = () => {
     )
   }, [])
 
-  const validateSighted = () => {
-    const resultFind = user?.sighted.find(pokemon => pokemon.name.includes(descriptions.name));
+  const validateFavorite = () => {
+    const resultFind = user?.favorites.find(pokemon => pokemon.id == descriptions.id);
     if (resultFind) {
       return true
     }
     return false
   }
 
-  const validateCaptured = () => {
-    const resultFind = user?.favorites.find(pokemon => pokemon.name.includes(descriptions.name));
-    if (resultFind) {
-      return true
+  const verifyFavorite = () => {
+    if(!validateFavorite()) {
+      favoritePokemon(descriptions) 
+    } else {
+      disfavorPokemon(descriptions);
     }
-    return false
   }
 
   const renderHeader = useMemo(() => {
@@ -113,11 +113,10 @@ const PokemonDetails: React.FC = () => {
           {
             title === "Capturados" && (
               <ContainerIcons
-                onPress={() => { descriptions && favoritePokemon(descriptions) }}
-                disabled={validateCaptured()}
+                onPress={() => { verifyFavorite() }}
               >
                 {
-                  validateCaptured() ? (
+                  validateFavorite() ? (
                     <HeartRed width={resp(35)} height={resp(35)} />
                   ) : (
                     <HeartLight width={resp(35)} height={resp(35)} />

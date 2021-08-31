@@ -16,6 +16,7 @@ export interface IUserContext {
   spotPokemon(item: IDescriptionPokemon): void;
   capturePokemon(item: IDescriptionPokemon): void;
   favoritePokemon(item: IDescriptionPokemon): void;
+  disfavorPokemon(item: IDescriptionPokemon): void;
   saveComments(item: IDescriptionPokemonCaptured): void;
   logOff(): void;
 }

@@ -258,6 +258,54 @@ export const UserProvider: React.FC = ({ children }) => {
     }
   }
 
+  //Função para Desfavoritar pokemon
+  const disfavorPokemon = async (item: IDescriptionPokemon) => {
+    const resultUsers = await AsyncStorage.getItem('@users');
+
+    if (resultUsers !== null) {
+      const users: IUser[] = JSON.parse(resultUsers);
+      const resultIndex = users?.findIndex(user => user?.email?.includes(user?.email?.toString()));
+
+      if (resultIndex >= 0 && user?.favorites !== undefined) {
+        const resultIndexFavorite = user.favorites.findIndex(favorite => favorite.id === item.id);
+
+        if(resultIndexFavorite >= 0) {
+          let newUser = {
+            ...user,
+            favorites: user.favorites.filter(favorite => favorite.id !== item.id),
+          }
+
+          users[resultIndex] = newUser;
+
+          try {
+            
+            Promise.all([
+              await AsyncStorage.setItem('@users', JSON.stringify(users)),
+              await AsyncStorage.setItem('@user', JSON.stringify(newUser))
+            ]);
+
+            setUser(newUser);
+
+            return Alert.alert('SUCESSO!', 'O pokemon foi desfavoritado!');
+          } catch (err) {
+            console.log(err)
+            Alert.alert('OPS!', 'Ocorreu um erro ao desfavoritar o pokemon, por favor, tente novamente.');
+          }
+
+          return Alert.alert('EBA!', 'O pokemon é um dos seus favoritos agora!');
+        } else {
+          Alert.alert("OPS!", "O pokemon já foi desfavoritado!");
+        }
+      } else {
+        Alert.alert("OPS!", "O usuário não foi encontrado na base de dados");
+        logOff();
+      }
+    } else {
+      Alert.alert("OPS!", "Ocorreu algum problema com o nosso banco de dados, por favor, logue novamente!");
+      logOff();
+    }
+  }
+
   //Função para salvar as observações
   const saveComments = async (item: IDescriptionPokemonCaptured) => {
     const resultUsers = await AsyncStorage.getItem('@users');
@@ -308,7 +356,7 @@ export const UserProvider: React.FC = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider value={{ user, signin, validateFields, spotPokemon, capturePokemon, favoritePokemon, saveComments, logOff }}>
+    <UserContext.Provider value={{ user, signin, validateFields, spotPokemon, capturePokemon, favoritePokemon, saveComments, logOff, disfavorPokemon }}>
       {children}
     </UserContext.Provider>
   )
