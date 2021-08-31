@@ -151,7 +151,7 @@ const PokemonDetails: React.FC = () => {
           source={textSpecies}
           resizeMode="contain"
         />
-        <TextList style={{ marginLeft: resp(35) }}>
+        <TextList>
           {descriptions?.species?.name}
         </TextList>
 
@@ -172,7 +172,7 @@ const PokemonDetails: React.FC = () => {
           source={textWeight}
           resizeMode="contain"
         />
-        <TextList style={{ marginLeft: resp(35) }}>
+        <TextList>
           {descriptions?.weight} kg
         </TextList>
 
@@ -180,7 +180,7 @@ const PokemonDetails: React.FC = () => {
           source={textHeight}
           resizeMode="contain"
         />
-        <TextList style={{ marginLeft: resp(35) }}>
+        <TextList>
           {descriptions?.weight} cm
         </TextList>
       </ContainerImageLabel>

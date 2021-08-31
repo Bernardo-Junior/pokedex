@@ -134,13 +134,13 @@ const DescriptionAllPokemons: React.FC = () => {
             </LabelName>
           </ContainerName>
 
-          <ContainerIcons 
+          <ContainerIcons
             disabled={validateCaptured() && descriptions.abilities != undefined}
             onPress={() => { descriptions && capturePokemon(descriptions) }}
           >
             <Image source={Pokeball} resizeMode="contain" />
             <LabelIcons verify={validateCaptured()}>
-            {validateCaptured() ? "Capturado" : "Capturar"}
+              {validateCaptured() ? "Capturado" : "Capturar"}
             </LabelIcons>
           </ContainerIcons>
         </ContainerSubHeader>
@@ -151,6 +151,15 @@ const DescriptionAllPokemons: React.FC = () => {
         >
 
         </ContainerImagePokemon>
+
+        <ImageLabel
+          style={{ marginLeft: resp(4) }}
+          source={textSpecies}
+          resizeMode="contain"
+        />
+        <TextList>
+          {descriptions?.species?.name}
+        </TextList>
 
         <ImageLabel
           style={{ marginTop: resp(10) }}
@@ -164,20 +173,11 @@ const DescriptionAllPokemons: React.FC = () => {
   const renderFooter = () => {
     return (
       <ContainerImageLabel>
-        <ImageLabel
-          style={{ marginLeft: resp(4) }}
-          source={textSpecies}
-          resizeMode="contain"
-        />
-        <TextList style={{ marginLeft: resp(35) }}>
-          {descriptions?.species?.name}
-        </TextList>
-
         <ImageLabelWeight
           source={textWeight}
           resizeMode="contain"
         />
-        <TextList style={{ marginLeft: resp(35) }}>
+        <TextList>
           {descriptions?.weight} kg
         </TextList>
 
@@ -185,7 +185,7 @@ const DescriptionAllPokemons: React.FC = () => {
           source={textHeight}
           resizeMode="contain"
         />
-        <TextList style={{ marginLeft: resp(35) }}>
+        <TextList>
           {descriptions?.weight} cm
         </TextList>
       </ContainerImageLabel>
