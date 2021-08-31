@@ -4,7 +4,7 @@ import { ColorPrimary, Container, errorFunction, styles } from '../../../utils/g
 import Header from '../../components/Header';
 
 //Estilização 
-import { ContainerInput, ContainerList, ContainerMainInput, Hr, ImageList, Input, LabelList } from './styles';
+import { ContainerInput, ContainerList, ContainerMainInput, Hr, ImageList, Input, LabelList, TextEmpty } from './styles';
 import resp from '../../../utils/responsivity';
 
 //Icones
@@ -116,6 +116,14 @@ const PokemonListing: React.FC = () => {
     }
   }
 
+  const renderEmpty = () => {
+    return (
+      <TextEmpty>
+        Nenhum pokemon encontrado
+      </TextEmpty>
+    )
+  }
+
   return (
     <Container style={{ backgroundColor: "#FFFFFF" }}>
       <Header name={`${titleHeader}`} />
@@ -123,10 +131,11 @@ const PokemonListing: React.FC = () => {
       {renderHeader()}
 
       <FlatList
+        ListEmptyComponent={renderEmpty}
         removeClippedSubviews
         maxToRenderPerBatch={5}
         initialNumToRender={20}
-        data={formatData(pokemons, 3)}
+        data={pokemons}
         numColumns={3}
         keyExtractor={pokemon => pokemon.name}
         renderItem={renderItems}

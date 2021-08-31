@@ -26,7 +26,7 @@ import {
   ContainerArrow,
   LabelBtn,
   BtnObservations,
-  BtnObservationsLabel
+  BtnObservationsLabel,
 } from './styles';
 import { Container, errorFunction, styles } from '../../../utils/global';
 
@@ -147,6 +147,16 @@ const PokemonDetails: React.FC = () => {
         }
 
         <ImageLabel
+          style={{ marginLeft: resp(4) }}
+          source={textSpecies}
+          resizeMode="contain"
+        />
+        <TextList style={{ marginLeft: resp(35) }}>
+          {descriptions?.species?.name}
+        </TextList>
+
+
+        <ImageLabel
           style={{ marginTop: resp(10) }}
           source={textSkills}
           resizeMode="contain"
@@ -158,15 +168,6 @@ const PokemonDetails: React.FC = () => {
   const renderFooter = () => {
     return (
       <ContainerImageLabel>
-        <ImageLabel
-          style={{ marginLeft: resp(4) }}
-          source={textSpecies}
-          resizeMode="contain"
-        />
-        <TextList style={{ marginLeft: resp(35) }}>
-          {descriptions?.species?.name}
-        </TextList>
-
         <ImageLabelWeight
           source={textWeight}
           resizeMode="contain"
@@ -185,6 +186,7 @@ const PokemonDetails: React.FC = () => {
       </ContainerImageLabel>
     )
   }
+
 
   return (
     <Container style={{ backgroundColor: "#FFFFFF" }}>

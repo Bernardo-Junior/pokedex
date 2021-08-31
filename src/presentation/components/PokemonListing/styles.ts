@@ -59,3 +59,8 @@ export const LabelList = styled.Text`
   color: #3E60A4;
   font-family: "OpenSans-Bold";
 `;
+
+export const TextEmpty = styled.Text`
+  font-family: "OpenSans-SemiBold";
+  font-size: ${resp(16)}px;
+`;
