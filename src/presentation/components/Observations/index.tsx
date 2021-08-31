@@ -52,6 +52,7 @@ import { useState } from 'react';
 import { ListRenderItem } from 'react-native';
 import { useEffect } from 'react';
 import ModalOptions from './ModalOptions';
+import { useMemo } from 'react';
 
 
 export type RootStackParamList = {
@@ -319,6 +320,42 @@ const Observations: React.FC = () => {
     saveComments(descriptions);
   }
 
+  const renderHabitats = useMemo(() => {
+    return (
+        descriptions.comments.habitats.map(item => {
+          return (
+            <ContainerMap key={item.id}>
+              {renderItems(item, "Observações")}
+            </ContainerMap>
+          )
+        })
+    )
+  }, [descriptions, count])
+
+  const renderFoods = useMemo(() => {
+    return (
+        descriptions.comments.Foods.map(item => {
+          return (
+            <ContainerMap key={item.id}>
+              {renderItems(item, "Alimentação")}
+            </ContainerMap>
+          )
+        })
+    )
+  }, [descriptions, count])
+
+  const renderCuriosities = useMemo(() => { 
+    return (
+        descriptions.comments.otherCuriosities.map(item => {
+          return (
+            <ContainerMap key={item.id}>
+              {renderItems(item, "Curiosidades")}
+            </ContainerMap>
+          )
+        })
+    )
+  }, [descriptions, count])
+
   return (
     <>
     <Container style={{ backgroundColor: "#FFFFFF" }}>
@@ -357,15 +394,7 @@ const Observations: React.FC = () => {
             </BtnPlus>
           </ContainerImages>
 
-          {
-            descriptions.comments.habitats.map(item => {
-              return (
-                <ContainerMap key={item.id}>
-                  {renderItems(item, "Observações")}
-                </ContainerMap>
-              )
-            })
-          }
+          {renderHabitats}
 
           <ImageLocalization source={textLocalization} resizeMode="contain" />
 
@@ -392,15 +421,7 @@ const Observations: React.FC = () => {
             </BtnPlus>
           </ContainerImages>
 
-          {
-            descriptions.comments.Foods.map(item => {
-              return (
-                <ContainerMap key={item.id}>
-                  {renderItems(item, "Alimentação")}
-                </ContainerMap>
-              )
-            })
-          }
+          {renderFoods}
 
           <ContainerImages>
             <ImageCuriosities source={textCuriosities} resizeMode="contain" />
@@ -416,15 +437,7 @@ const Observations: React.FC = () => {
             </BtnPlus>
           </ContainerImages>
 
-          {
-            descriptions.comments.otherCuriosities.map(item => {
-              return (
-                <ContainerMap key={item.id}>
-                  {renderItems(item, "Curiosidades")}
-                </ContainerMap>
-              )
-            })
-          }
+          {renderCuriosities}
 
           <ButtonSave
             style={styles.shadow}
