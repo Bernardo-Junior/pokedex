@@ -68,7 +68,8 @@ const PokemonListing: React.FC = () => {
 
   const renderItems: ListRenderItem<IDescriptionPokemon> = useCallback(({ item }) => {
     return (
-      <ContainerList
+      item.height !== -1 ? (
+        <ContainerList
         style={styles.shadow}
         onPress={() => { navigate('PokemonDetails', { item, title: titleHeader }) }}
       >
@@ -76,6 +77,13 @@ const PokemonListing: React.FC = () => {
         <LabelList>
           {item?.name}
         </LabelList>
+      </ContainerList>
+      )  :
+
+      <ContainerList
+        style={[styles.shadow, { backgroundColor: 'transparent' }]}
+        disabled={true}
+      >
       </ContainerList>
     )
   }, [])
@@ -118,7 +126,7 @@ const PokemonListing: React.FC = () => {
         removeClippedSubviews
         maxToRenderPerBatch={5}
         initialNumToRender={20}
-        data={pokemons}
+        data={formatData(pokemons, 3)}
         numColumns={3}
         keyExtractor={pokemon => pokemon.name}
         renderItem={renderItems}

@@ -123,7 +123,7 @@ const DescriptionAllPokemons: React.FC = () => {
             disabled={validateSighted()}
           >
             <Image source={Sighted} resizeMode="contain" />
-            <LabelIcons verify={validateSighted()}>
+            <LabelIcons verify={validateSighted() && descriptions.abilities != undefined}>
               {validateSighted() ? "Já avistado" : "Avistar"}
             </LabelIcons>
           </ContainerIcons>
@@ -135,7 +135,7 @@ const DescriptionAllPokemons: React.FC = () => {
           </ContainerName>
 
           <ContainerIcons 
-            disabled={validateCaptured()}
+            disabled={validateCaptured() && descriptions.abilities != undefined}
             onPress={() => { descriptions && capturePokemon(descriptions) }}
           >
             <Image source={Pokeball} resizeMode="contain" />
