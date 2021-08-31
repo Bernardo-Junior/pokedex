@@ -25,11 +25,29 @@ const DrawerNavigator: React.FC = () => {
         width: resp(340),
       }}
     >
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="DescriptionAllPokemons" component={DescriptionAllPokemons} />
-      <Drawer.Screen name="PokemonListing" component={PokemonListing} />
-      <Drawer.Screen name="PokemonDetails" component={PokemonDetails} />
-      <Drawer.Screen name="Observations" component={Observations} />
+      <Drawer.Screen
+        name="Home" component={Home}
+      />
+      <Drawer.Screen
+        name="DescriptionAllPokemons"
+        component={DescriptionAllPokemons}
+        options={{ unmountOnBlur: true }} 
+      />
+      <Drawer.Screen
+        name="PokemonListing"
+        component={PokemonListing}
+        options={{ unmountOnBlur: true }}
+      />
+      <Drawer.Screen
+        name="PokemonDetails"
+        component={PokemonDetails}
+        options={{ unmountOnBlur: true }}
+      />
+      <Drawer.Screen
+        name="Observations"
+        component={Observations}
+        options={{ unmountOnBlur: true }}
+      />
     </Drawer.Navigator>
   )
 };
