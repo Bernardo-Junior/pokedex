@@ -17,6 +17,16 @@ Primeiramente, para começar a desenvolver o código, precisei consultar a api [
 
 ---
 
+## 📱 Instruções de Execução
+1 - Clone o aplicativo usando o link https://github.com/Bernardo-Junior/pokedex.git;
+2 - Abra a pasta que foi gerada no terminal e execute o comando yarn install;
+3 - Depois de instalado as dependências, se você for executar o aplicativo no android, apenas usa o comando yarn android;
+3.1 - Caso queira executar o aplicativo no dispositivo iOS (iphone), vá para a pasta ios usando o comando cd ios/ e depois execute o comando pod install. Depois de instalado as dependências do iOS, para rodar em seu dispositivo, use o comando yarn ios.
+
+---
+
+---
+
 ## 👨‍💻️ Modulos
 - Todos os pokemons ✔️;
 - Capturados ✔️;
