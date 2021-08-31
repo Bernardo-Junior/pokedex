@@ -147,7 +147,7 @@ const PokemonDetails: React.FC = () => {
         }
 
         <ImageLabel
-          style={{ marginLeft: resp(4) }}
+          style={{ marginLeft: resp(4), marginTop: resp(30)}}
           source={textSpecies}
           resizeMode="contain"
         />
