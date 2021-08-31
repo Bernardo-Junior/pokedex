@@ -32,8 +32,8 @@ import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView } from 'r
 
 const Login: React.FC = () => {
   const [press, setPress] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("bernardo@gmail.com");
-  const [password, setPassword] = useState<string>("123456");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [buttonPress, setButtonPress] = useState<boolean>(false);
   const { navigate } = useNavigation();
   const { signin } = useContext(UserContext);

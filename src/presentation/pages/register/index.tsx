@@ -34,9 +34,9 @@ import UserContext from '../../../data/contexts/User';
 
 const Register: React.FC = () => {
   const [press, setPress] = useState<boolean>(false);
-  const [name, setName] = useState<string>("Bernardo");
-  const [email, setEmail] = useState<string>("bernardo@gmail.com");
-  const [password, setPassword] = useState<string>("123456");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const { goBack } = useNavigation();
 
   const { validateFields } = useContext(UserContext);
